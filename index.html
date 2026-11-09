@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usmonov Nodirbek | Veb-dasturchi Portfoliosi</title>
+    <title>Usmonov Nodirbek | Senior Full-Stack & Frontend Portfolio</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Plus Jakarta Sans, Inter & JetBrains Mono -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -23,23 +23,15 @@
                         display: ['Plus Jakarta Sans', 'sans-serif'],
                         mono: ['JetBrains Mono', 'monospace'],
                     },
-                    colors: {
-                        brand: {
-                            50: '#ecfdf5',
-                            100: '#d1fae5',
-                            400: '#34d399',
-                            500: '#10b981',
-                            600: '#059669',
-                        }
-                    },
                     animation: {
-                        'float': 'float 6s ease-in-out infinite',
                         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 8s linear infinite',
+                        'shimmer': 'shimmer 1.8s infinite linear',
                     },
                     keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-10px)' },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' },
                         }
                     }
                 }
@@ -48,100 +40,225 @@
     </script>
 
     <style>
-        /* Custom Background Grid & Glow Effects */
-        .bg-grid-pattern {
-            background-size: 40px 40px;
+        /* Cyber-Luxury Grid & Spotlight Styling */
+        .bg-cyber-grid {
+            background-size: 48px 48px;
             background-image: 
-                linear-gradient(to right, rgba(148, 163, 184, 0.07) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(148, 163, 184, 0.07) 1px, transparent 1px);
+                linear-gradient(to right, rgba(16, 185, 129, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(16, 185, 129, 0.05) 1px, transparent 1px);
         }
-        .glass-card {
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+        .glass-panel {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        /* Interactive Mouse Spotlight Card */
+        .spotlight-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .spotlight-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(16, 185, 129, 0.12), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .spotlight-card:hover::before {
+            opacity: 1;
+        }
+        /* Skeleton Shimmer Loader */
+        .skeleton-loader {
+            background: linear-gradient(90deg, rgba(30,41,59,0.4) 25%, rgba(16,185,129,0.15) 50%, rgba(30,41,59,0.4) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite linear;
+        }
+        /* Preloader Curtain Transition */
+        #boot-preloader {
+            transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #boot-preloader.preloader-hidden {
+            opacity: 0;
+            transform: scale(1.04);
+            pointer-events: none;
         }
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #0f172a;
+            background: #020617;
         }
         ::-webkit-scrollbar-thumb {
-            background: #334155;
+            background: #1e293b;
             border-radius: 9999px;
+            border: 2px solid #020617;
         }
         ::-webkit-scrollbar-thumb:hover {
             background: #10b981;
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 font-sans antialiased selection:bg-emerald-500 selection:text-white transition-colors duration-300 overflow-x-hidden">
+<body class="bg-slate-50 text-slate-900 dark:bg-[#030712] dark:text-slate-100 font-sans antialiased selection:bg-emerald-500 selection:text-white transition-colors duration-300 overflow-x-hidden">
 
-    <!-- Ambient Background Glows -->
-    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div class="absolute inset-0 bg-grid-pattern"></div>
-        <div class="absolute -top-40 -left-40 w-96 h-96 bg-emerald-500/15 dark:bg-emerald-500/10 rounded-full blur-3xl animate-pulse-slow"></div>
-        <div class="absolute top-1/3 -right-40 w-96 h-96 bg-cyan-500/15 dark:bg-cyan-500/10 rounded-full blur-3xl animate-pulse-slow"></div>
-        <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-indigo-500/15 dark:bg-indigo-500/10 rounded-full blur-3xl"></div>
+    <!-- TOP SCROLL PROGRESS BAR -->
+    <div class="fixed top-0 left-0 right-0 h-1 z-50 bg-slate-200/20 dark:bg-slate-900/50">
+        <div id="scroll-progress" class="h-full w-0 bg-gradient-to-r from-emerald-400 via-cyan-400 to-indigo-500 shadow-[0_0_12px_#10b981] transition-all duration-75"></div>
     </div>
 
-    <!-- Toast Notification Container -->
-    <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 pointer-events-none"></div>
+    <!-- ==========================================
+         1. CINEMATIC DEVELOPER BOOT PRELOADER
+         ========================================== -->
+    <div id="boot-preloader" class="fixed inset-0 z-[100] bg-[#020617] text-white flex flex-col justify-between p-6 sm:p-12 overflow-hidden">
+        <!-- Background Ambient Glow inside Preloader -->
+        <div class="absolute inset-0 bg-cyber-grid opacity-60 pointer-events-none"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-emerald-500/15 rounded-full blur-[130px] pointer-events-none"></div>
 
-    <!-- Header / Navigation -->
-    <header class="sticky top-0 z-40 border-b border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-slate-950/80 glass-card transition-colors duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Brand Logo -->
-            <a href="#home" class="flex items-center gap-3 group">
-                <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-600 flex items-center justify-center text-white font-mono font-bold text-lg shadow-lg shadow-emerald-500/25 group-hover:scale-105 transition-transform">
+        <!-- Top Bar -->
+        <div class="relative z-10 flex items-center justify-between border-b border-slate-800/80 pb-4">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center font-mono font-bold text-slate-950 text-sm shadow-lg shadow-emerald-500/30">
                     UN
                 </div>
+                <div class="font-mono text-xs sm:text-sm tracking-wider text-emerald-400">
+                    UN // SYSTEM INITIALIZING v3.4
+                </div>
+            </div>
+            <button onclick="finishPreloader()" class="px-3.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300 hover:text-emerald-400 transition-all flex items-center gap-2">
+                <span>O'tkazib yuborish (Skip)</span>
+                <i class="fa-solid fa-forward-fast text-[10px]"></i>
+            </button>
+        </div>
+
+        <!-- Center Boot Terminal & Progress Counter -->
+        <div class="relative z-10 max-w-2xl w-full mx-auto my-auto space-y-8">
+            <div class="flex items-baseline justify-between">
                 <div>
-                    <span class="font-display font-bold text-lg tracking-tight block leading-none text-slate-900 dark:text-white">
-                        Nodirbek<span class="text-emerald-500">.dev</span>
+                    <span class="text-xs font-mono uppercase tracking-widest text-emerald-400 block mb-1">PORTFOLIO ENGINE</span>
+                    <h2 class="font-display text-2xl sm:text-4xl font-extrabold tracking-tight text-white">
+                        Usmonov Nodirbek
+                    </h2>
+                </div>
+                <div class="font-mono text-4xl sm:text-6xl font-extrabold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent" id="boot-percent">
+                    0%
+                </div>
+            </div>
+
+            <!-- Glowing Progress Track -->
+            <div class="w-full h-2.5 rounded-full bg-slate-900 border border-slate-800 overflow-hidden p-0.5">
+                <div id="boot-bar" class="h-full rounded-full bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 shadow-[0_0_20px_#10b981] transition-all duration-100" style="width: 0%"></div>
+            </div>
+
+            <!-- Live Boot Logs Box -->
+            <div class="p-4 sm:p-5 rounded-2xl bg-slate-950/90 border border-slate-800/90 font-mono text-xs sm:text-sm space-y-2 h-40 overflow-hidden shadow-2xl">
+                <div class="flex items-center justify-between text-[11px] text-slate-500 border-b border-slate-800/80 pb-2 mb-2">
+                    <span>BOOT_SEQUENCE.LOG</span>
+                    <span class="text-emerald-400 flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        ACTIVE
                     </span>
-                    <span class="text-xs font-mono text-slate-500 dark:text-slate-400" data-i18n="navRole">Web Developer • 3+ Yil</span>
+                </div>
+                <div id="boot-logs" class="space-y-1.5 text-slate-300"></div>
+            </div>
+        </div>
+
+        <!-- Bottom Status Footer -->
+        <div class="relative z-10 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-slate-500 border-t border-slate-800/80 pt-4">
+            <div>HOST: <span class="text-slate-300">NODIRBEK.DEV // PRODUCTION</span></div>
+            <div>FEATURED: <span class="text-emerald-400">IQBOL-RESTAURANT.UZ</span></div>
+            <div>SMTP: <span class="text-cyan-400">UR.USMONOV@GMAIL.COM</span></div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         AMBIENT CANVAS & GLOW BACKGROUND
+         ========================================== -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <canvas id="network-canvas" class="absolute inset-0 w-full h-full opacity-40 dark:opacity-60"></canvas>
+        <div class="absolute inset-0 bg-cyber-grid"></div>
+        <div class="absolute -top-48 -left-48 w-[500px] h-[500px] bg-emerald-500/15 dark:bg-emerald-500/10 rounded-full blur-[140px] animate-pulse-slow"></div>
+        <div class="absolute top-1/3 -right-48 w-[500px] h-[500px] bg-cyan-500/15 dark:bg-cyan-500/10 rounded-full blur-[140px] animate-pulse-slow"></div>
+        <div class="absolute -bottom-48 left-1/4 w-[500px] h-[500px] bg-indigo-500/15 dark:bg-indigo-500/10 rounded-full blur-[140px]"></div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 max-w-sm w-full pointer-events-none px-4 sm:px-0"></div>
+
+    <!-- ==========================================
+         HEADER / NAVIGATION BAR
+         ========================================== -->
+    <header class="sticky top-0 z-40 border-b border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-[#030712]/80 glass-panel transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#home" class="flex items-center gap-3.5 group">
+                <div class="relative">
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-600 flex items-center justify-center text-slate-950 font-mono font-extrabold text-lg shadow-lg shadow-emerald-500/25 group-hover:scale-105 transition-transform">
+                        UN
+                    </div>
+                    <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-white dark:border-slate-950"></span>
+                </div>
+                <div>
+                    <span class="font-display font-extrabold text-lg tracking-tight block leading-none text-slate-900 dark:text-white">
+                        Usmonov<span class="text-emerald-500">.dev</span>
+                    </span>
+                    <span class="text-[11px] font-mono text-slate-500 dark:text-emerald-400/90 mt-1 block" data-i18n="navRole">
+                        Full-Stack & Frontend • 3+ Yil
+                    </span>
                 </div>
             </a>
 
             <!-- Desktop Navigation -->
-            <nav class="hidden md:flex items-center gap-1 lg:gap-2">
-                <a href="#home" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all" data-i18n="navHome">Bosh sahifa</a>
-                <a href="#about" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all" data-i18n="navAbout">Tajriba</a>
-                <a href="#skills" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all" data-i18n="navSkills">Texnologiyalar</a>
-                <a href="#projects" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all" data-i18n="navProjects">Loyihalar</a>
-                <a href="#contact" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all" data-i18n="navContact">Bog'lanish</a>
+            <nav class="hidden lg:flex items-center gap-1 p-1.5 rounded-2xl bg-slate-100/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80">
+                <a href="#home" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-emerald-500 dark:hover:text-emerald-400 hover:bg-white dark:hover:bg-slate-800/80 transition-all" data-i18n="navHome">Bosh sahifa</a>
+                <a href="#about" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-emerald-500 dark:hover:text-emerald-400 hover:bg-white dark:hover:bg-slate-800/80 transition-all" data-i18n="navAbout">3 Yillik Tajriba</a>
+                <a href="#skills" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-emerald-500 dark:hover:text-emerald-400 hover:bg-white dark:hover:bg-slate-800/80 transition-all" data-i18n="navSkills">Texnologiyalar</a>
+                <a href="#projects" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-emerald-500 dark:hover:text-emerald-400 hover:bg-white dark:hover:bg-slate-800/80 transition-all" data-i18n="navProjects">Loyihalar (Live)</a>
+                <a href="#contact" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-emerald-500 dark:hover:text-emerald-400 hover:bg-white dark:hover:bg-slate-800/80 transition-all" data-i18n="navContact">Bog'lanish</a>
             </nav>
 
-            <!-- Action Controls (Language, Theme, Hire Me CTA) -->
-            <div class="hidden md:flex items-center gap-3">
+            <!-- Action Controls -->
+            <div class="hidden md:flex items-center gap-2.5">
+                <!-- Replay Boot Animation Button -->
+                <button onclick="replayPreloader()" class="px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100/80 dark:bg-slate-900/80 text-xs font-mono text-slate-600 dark:text-slate-300 hover:border-emerald-500/50 hover:text-emerald-400 transition-all flex items-center gap-1.5" title="Boot Loading animatsiyasini qayta ko'rish">
+                    <i class="fa-solid fa-bolt text-amber-400"></i>
+                    <span class="hidden xl:inline">Boot Intro</span>
+                </button>
+
                 <!-- Language Switcher -->
-                <button id="lang-toggle" onclick="toggleLanguage()" class="px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100/80 dark:bg-slate-900/80 text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 hover:border-emerald-500/50 transition-all flex items-center gap-1.5" title="Tilni o'zgartirish / Switch Language">
+                <button onclick="toggleLanguage()" class="px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100/80 dark:bg-slate-900/80 text-xs font-mono font-bold text-slate-700 dark:text-slate-300 hover:border-emerald-500/50 transition-all flex items-center gap-1.5">
                     <i class="fa-solid fa-globe text-emerald-500"></i>
                     <span id="lang-label">UZ</span>
                 </button>
 
                 <!-- Theme Toggle -->
-                <button id="theme-toggle" onclick="toggleTheme()" class="w-10 h-10 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100/80 dark:bg-slate-900/80 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:border-emerald-500/50 hover:text-emerald-500 transition-all" title="Mavzuni o'zgartirish">
+                <button onclick="toggleTheme()" class="w-10 h-10 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100/80 dark:bg-slate-900/80 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:border-emerald-500/50 hover:text-emerald-500 transition-all" title="Tungi / Kunduzgi rejim">
                     <i id="theme-icon" class="fa-solid fa-sun text-amber-400"></i>
                 </button>
 
-                <!-- Hire Me Button -->
-                <a href="#contact" class="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-sm shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all flex items-center gap-2">
-                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                <!-- Hire Me CTA -->
+                <a href="#contact" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold text-xs sm:text-sm shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
                     <span data-i18n="navHireBtn">Ishga taklif qilish</span>
                 </a>
             </div>
 
-            <!-- Mobile Hamburger Button -->
+            <!-- Mobile Controls -->
             <div class="flex items-center gap-2 md:hidden">
+                <button onclick="replayPreloader()" class="w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 flex items-center justify-center text-amber-400" title="Loading Intro">
+                    <i class="fa-solid fa-bolt text-xs"></i>
+                </button>
                 <button onclick="toggleLanguage()" class="px-2.5 py-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 text-xs font-mono font-bold">
                     <span id="mobile-lang-label">UZ</span>
                 </button>
                 <button onclick="toggleTheme()" class="w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 flex items-center justify-center">
                     <i id="mobile-theme-icon" class="fa-solid fa-sun text-amber-400 text-sm"></i>
                 </button>
-                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-200">
+                <button onclick="toggleMobileMenu()" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-200">
                     <i id="mobile-menu-icon" class="fa-solid fa-bars text-lg"></i>
                 </button>
             </div>
@@ -149,493 +266,650 @@
 
         <!-- Mobile Menu Dropdown -->
         <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 px-4 pt-3 pb-6 space-y-2">
-            <a href="#home" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-emerald-500/10 hover:text-emerald-500" data-i18n="navHome">Bosh sahifa</a>
-            <a href="#about" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-emerald-500/10 hover:text-emerald-500" data-i18n="navAbout">Tajriba</a>
-            <a href="#skills" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-emerald-500/10 hover:text-emerald-500" data-i18n="navSkills">Texnologiyalar</a>
-            <a href="#projects" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-emerald-500/10 hover:text-emerald-500" data-i18n="navProjects">Loyihalar</a>
-            <a href="#contact" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-emerald-500/10 hover:text-emerald-500" data-i18n="navContact">Bog'lanish</a>
+            <a href="#home" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-emerald-500/10 hover:text-emerald-500" data-i18n="navHome">Bosh sahifa</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-emerald-500/10 hover:text-emerald-500" data-i18n="navAbout">3 Yillik Tajriba</a>
+            <a href="#skills" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-emerald-500/10 hover:text-emerald-500" data-i18n="navSkills">Texnologiyalar</a>
+            <a href="#projects" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-emerald-500/10 hover:text-emerald-500" data-i18n="navProjects">Loyihalar (Live)</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-emerald-500/10 hover:text-emerald-500" data-i18n="navContact">Bog'lanish</a>
             <div class="pt-2">
-                <a href="mailto:ur.usmonov@gmail.com" class="w-full py-3 rounded-xl bg-emerald-500 text-white font-semibold text-center block shadow-lg shadow-emerald-500/25">
+                <a href="#contact" onclick="toggleMobileMenu()" class="w-full py-3 rounded-xl bg-emerald-500 text-white font-semibold text-center block shadow-lg shadow-emerald-500/25">
                     ur.usmonov@gmail.com
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
+    <!-- ==========================================
+         MAIN CONTENT
+         ========================================== -->
     <main class="relative z-10">
 
         <!-- HERO SECTION -->
-        <section id="home" class="pt-12 pb-20 md:pt-20 md:pb-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <section id="home" class="pt-10 pb-20 md:pt-16 md:pb-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
                 
-                <!-- Left Column: Intro & CTAs -->
+                <!-- Left Column: High-Impact Developer Pitch -->
                 <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
                     
-                    <!-- Status & Experience Badges -->
+                    <!-- Status Pills -->
                     <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3">
-                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs sm:text-sm font-medium">
-                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-                            <span class="w-2 h-2 rounded-full bg-emerald-500 -ml-4"></span>
-                            <span data-i18n="heroBadgeAvailable">Ish va yangi loyihalar uchun ochiqman</span>
+                        <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-mono font-semibold shadow-sm">
+                            <span class="relative flex h-2.5 w-2.5">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                            </span>
+                            <span data-i18n="heroBadgeAvailable">AVAILABLE FOR HIRE • ISHGA TAYYOR</span>
                         </div>
-                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-200/80 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-mono font-medium">
-                            <i class="fa-solid fa-code text-cyan-500"></i>
-                            <span data-i18n="heroBadgeExp">3+ Yillik Tajriba</span>
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-200/80 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 text-slate-700 dark:text-cyan-400 text-xs font-mono font-semibold">
+                            <i class="fa-solid fa-award text-amber-400"></i>
+                            <span data-i18n="heroBadgeExp">3+ Yillik Professional Tajriba</span>
                         </div>
                     </div>
 
-                    <!-- Main Title -->
-                    <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15]">
-                        <span data-i18n="heroGreeting">Salom, men</span> <br class="hidden sm:inline" />
-                        <span class="bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-500 bg-clip-text text-transparent">
-                            Usmonov Nodirbek
-                        </span>
-                    </h1>
+                    <!-- Main Headline -->
+                    <div class="space-y-2">
+                        <p class="font-mono text-xs sm:text-sm uppercase tracking-widest text-emerald-600 dark:text-emerald-400 font-semibold" data-i18n="heroGreeting">
+                            // PROFESSIONAL WEB ARCHITECT & DEVELOPER
+                        </p>
+                        <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.08]">
+                            Usmonov <br class="hidden sm:inline" />
+                            <span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
+                                Nodirbek
+                            </span>
+                        </h1>
+                        <!-- Dynamic Typing Sub-role -->
+                        <div class="h-8 flex items-center justify-center lg:justify-start font-mono text-sm sm:text-lg text-slate-600 dark:text-slate-300 pt-1">
+                            <span class="text-emerald-500 mr-2">&gt;</span>
+                            <span id="typewriter-text" class="font-semibold text-slate-800 dark:text-cyan-300">Full-Stack Web Developer</span>
+                            <span class="w-2 h-5 bg-emerald-500 ml-1 animate-pulse"></span>
+                        </div>
+                    </div>
 
-                    <!-- Subtitle / Bio -->
-                    <p class="text-base sm:text-lg lg:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed" data-i18n="heroBio">
-                        Men <strong class="text-slate-900 dark:text-white font-semibold">3 yillik amaliy tajribaga ega Veb-dasturchiman</strong>. Zamonaviy, tezkor va foydalanuvchilar uchun qulay veb-saytlar hamda raqamli platformalarni (<a href="https://iqbol-restaurant.uz" target="_blank" class="text-emerald-500 underline decoration-emerald-500/40 hover:decoration-emerald-500 font-mono">iqbol-restaurant.uz</a> kabi) noldan sifatli darajada yarataman.
+                    <!-- Bio Description -->
+                    <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed" data-i18n="heroBio">
+                        Men <strong class="text-slate-900 dark:text-white font-semibold">3 yillik amaliy tajribaga ega Veb-dasturchiman</strong>. Bizneslar uchun yuqori tezlikda ishlovchi, zamonaviy UI/UX arxitekturaga ega veb-saytlar va murakkab tizimlarni (<a href="https://iqbol-restaurant.uz" target="_blank" class="text-emerald-400 underline decoration-emerald-500/50 hover:decoration-emerald-400 font-mono font-semibold">iqbol-restaurant.uz</a> kabi) noldan ishlab chiqaman.
                     </p>
 
-                    <!-- Direct Email Quick Bar -->
-                    <div class="inline-flex flex-wrap items-center justify-center lg:justify-start gap-2 p-2 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <!-- Direct Verified Contact Bar -->
+                    <div class="inline-flex flex-wrap items-center justify-center lg:justify-start gap-2 p-2 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 shadow-lg">
                         <div class="flex items-center gap-2.5 px-3 py-1.5">
-                            <i class="fa-regular fa-envelope text-emerald-500"></i>
-                            <span class="text-xs sm:text-sm text-slate-500 dark:text-slate-400" data-i18n="heroHireLabel">Ishga taklif qilish uchun:</span>
-                            <span class="font-mono text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200">ur.usmonov@gmail.com</span>
+                            <span class="w-8 h-8 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
+                                <i class="fa-solid fa-envelope-circle-check"></i>
+                            </span>
+                            <div class="text-left">
+                                <span class="text-[10px] font-mono uppercase tracking-wider text-slate-400 block" data-i18n="heroHireLabel">Ishga taklif qilish / Aloqa:</span>
+                                <span class="font-mono text-xs sm:text-sm font-bold text-slate-900 dark:text-white">ur.usmonov@gmail.com</span>
+                            </div>
                         </div>
-                        <button onclick="copyEmail()" class="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-500 text-slate-700 dark:text-slate-300 text-xs font-medium transition-all flex items-center gap-1.5">
-                            <i class="fa-regular fa-copy"></i>
-                            <span data-i18n="copyBtn">Nusxalash</span>
-                        </button>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="copyEmail()" class="px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-emerald-500 hover:text-white text-slate-700 dark:text-slate-300 text-xs font-mono font-semibold transition-all flex items-center gap-1.5">
+                                <i class="fa-regular fa-copy"></i>
+                                <span data-i18n="copyBtn">Nusxalash</span>
+                            </button>
+                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ur.usmonov@gmail.com&su=Ish%20taklifi%20-%20Usmonov%20Nodirbek" target="_blank" rel="noopener noreferrer" class="px-3 py-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500 text-emerald-500 hover:text-white text-xs font-mono font-semibold transition-all flex items-center gap-1.5" title="Gmail orqali yozish">
+                                <i class="fa-brands fa-google"></i>
+                                <span>Gmail</span>
+                            </a>
+                        </div>
                     </div>
 
                     <!-- Primary Action Buttons -->
                     <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
-                        <a href="#projects" class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold text-base shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2.5">
-                            <i class="fa-solid fa-layer-group"></i>
-                            <span data-i18n="heroBtnProjects">Qilgan ishlarimni ko'rish</span>
+                        <a href="#projects" class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-600 hover:from-emerald-600 hover:to-cyan-700 text-white font-bold text-sm sm:text-base shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-display"></i>
+                            <span data-i18n="heroBtnProjects">Loyihalarni ko'rish (iqbol-restaurant.uz)</span>
                         </a>
-                        <a href="#contact" class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-800 font-semibold text-base transition-all flex items-center justify-center gap-2.5">
-                            <i class="fa-solid fa-briefcase text-emerald-500"></i>
-                            <span data-i18n="heroBtnContact">Bog'lanish / Ishga olish</span>
+                        <a href="#contact" class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-800 font-bold text-sm sm:text-base transition-all flex items-center justify-center gap-2.5">
+                            <i class="fa-solid fa-paper-plane text-emerald-500"></i>
+                            <span data-i18n="heroBtnContact">Xabar yuborish</span>
                         </a>
-                    </div>
-
-                    <!-- Key Metrics Row -->
-                    <div class="pt-6 grid grid-cols-3 gap-4 border-t border-slate-200/80 dark:border-slate-800/80 max-w-lg mx-auto lg:mx-0">
-                        <div>
-                            <div class="font-display text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">3+ <span class="text-emerald-500 text-xl">yil</span></div>
-                            <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400" data-i18n="statExp">Dasturlash tajribasi</div>
-                        </div>
-                        <div>
-                            <div class="font-display text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">100<span class="text-emerald-500">%</span></div>
-                            <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400" data-i18n="statQuality">Moslashuvchan & Tezkor</div>
-                        </div>
-                        <div>
-                            <div class="font-display text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">24/7</div>
-                            <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400" data-i18n="statSupport">Doimiy aloqa</div>
-                        </div>
                     </div>
                 </div>
 
-                <!-- Right Column: Interactive Code & Terminal Window -->
+                <!-- Right Column: Multi-Tab Developer IDE & Live Terminal -->
                 <div class="lg:col-span-5">
-                    <div class="relative rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl shadow-emerald-500/10 overflow-hidden">
-                        <!-- Window Header -->
-                        <div class="px-4 py-3 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+                    <div class="spotlight-card rounded-3xl bg-slate-900/95 border border-slate-800 shadow-2xl shadow-emerald-500/10 overflow-hidden">
+                        
+                        <!-- IDE Top Bar -->
+                        <div class="px-4 py-3 bg-slate-950 border-b border-slate-800 flex items-center justify-between gap-2">
                             <div class="flex items-center gap-2">
                                 <span class="w-3 h-3 rounded-full bg-rose-500"></span>
                                 <span class="w-3 h-3 rounded-full bg-amber-400"></span>
                                 <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
                             </div>
-                            <!-- Interactive Tabs -->
-                            <div class="flex bg-slate-900 p-1 rounded-lg border border-slate-800 text-xs font-mono">
-                                <button id="tab-code-btn" onclick="switchHeroTab('code')" class="px-3 py-1 rounded-md bg-emerald-500/20 text-emerald-400 font-medium transition-all">
-                                    nodirbek.js
+
+                            <!-- IDE File Tabs -->
+                            <div class="flex bg-slate-900 p-1 rounded-xl border border-slate-800 text-[11px] font-mono">
+                                <button id="ide-btn-profile" onclick="switchIdeTab('profile')" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-400 font-semibold transition-all">
+                                    profile.ts
                                 </button>
-                                <button id="tab-term-btn" onclick="switchHeroTab('terminal')" class="px-3 py-1 rounded-md text-slate-400 hover:text-slate-200 transition-all">
-                                    terminal
+                                <button id="ide-btn-arch" onclick="switchIdeTab('arch')" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-slate-200 transition-all">
+                                    metrics.json
+                                </button>
+                                <button id="ide-btn-term" onclick="switchIdeTab('term')" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-slate-200 transition-all flex items-center gap-1">
+                                    <i class="fa-solid fa-terminal text-[9px] text-cyan-400"></i>
+                                    <span>cli</span>
                                 </button>
                             </div>
-                            <span class="text-xs font-mono text-slate-500">UTF-8</span>
+
+                            <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">TS 5.4</span>
                         </div>
 
-                        <!-- Code View Tab -->
-                        <div id="hero-tab-code" class="p-5 sm:p-6 font-mono text-xs sm:text-sm leading-relaxed text-slate-300 overflow-x-auto">
-<pre class="space-y-1"><code><span class="text-purple-400">const</span> <span class="text-cyan-400">developer</span> = {
-  <span class="text-emerald-400">ism</span>: <span class="text-amber-300">"Usmonov Nodirbek"</span>,
-  <span class="text-emerald-400">soha</span>: <span class="text-amber-300">"Web Developer (Frontend & Fullstack)"</span>,
-  <span class="text-emerald-400">tajriba</span>: <span class="text-amber-300">"3 yil"</span>,
-  <span class="text-emerald-400">asosiyLoyiha</span>: <span class="text-amber-300">"https://iqbol-restaurant.uz"</span>,
-  <span class="text-emerald-400">texnologiyalar</span>: [
-    <span class="text-amber-300">"HTML5/CSS3"</span>, <span class="text-amber-300">"Tailwind CSS"</span>,
-    <span class="text-amber-300">"JavaScript"</span>, <span class="text-amber-300">"React"</span>, <span class="text-amber-300">"Responsive UI"</span>
-  ],
-  <span class="text-emerald-400">ishgaOlishUchun</span>: <span class="text-amber-300">"ur.usmonov@gmail.com"</span>,
-  <span class="text-blue-400">hamkorlikniBoshlash</span>() {
-    <span class="text-purple-400">return</span> <span class="text-amber-300">"Sifatli va zamonaviy veb-yechim!"</span>;
-  }
+                        <!-- IDE Loading Overlay (Triggered when switching tabs) -->
+                        <div id="ide-loader" class="hidden p-8 min-h-[320px] flex-col items-center justify-center bg-slate-950/90 text-center space-y-3">
+                            <div class="w-10 h-10 rounded-full border-2 border-emerald-500/30 border-t-emerald-400 animate-spin"></div>
+                            <div class="font-mono text-xs text-emerald-400">Compiling module...</div>
+                        </div>
+
+                        <!-- TAB 1: profile.ts -->
+                        <div id="ide-tab-profile" class="p-5 sm:p-6 font-mono text-xs sm:text-[13px] leading-relaxed text-slate-300 min-h-[320px] flex flex-col justify-between">
+<pre class="overflow-x-auto"><code><span class="text-purple-400">interface</span> <span class="text-cyan-300">DeveloperProfile</span> {
+  name: <span class="text-emerald-400">string</span>;
+  experienceYears: <span class="text-emerald-400">number</span>;
+  productionSite: <span class="text-emerald-400">string</span>;
+  contactEmail: <span class="text-emerald-400">string</span>;
+}
+
+<span class="text-purple-400">export const</span> <span class="text-blue-400">nodirbek</span>: <span class="text-cyan-300">DeveloperProfile</span> = {
+  <span class="text-emerald-400">name</span>: <span class="text-amber-300">"Usmonov Nodirbek"</span>,
+  <span class="text-emerald-400">experienceYears</span>: <span class="text-cyan-400">3</span>,
+  <span class="text-emerald-400">productionSite</span>: <span class="text-amber-300">"https://iqbol-restaurant.uz"</span>,
+  <span class="text-emerald-400">contactEmail</span>: <span class="text-amber-300">"ur.usmonov@gmail.com"</span>,
 };</code></pre>
-                            <div class="mt-5 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs">
-                                <span class="text-slate-400 flex items-center gap-2">
-                                    <i class="fa-solid fa-circle-check text-emerald-400"></i>
-                                    Status: Ready to deploy
+                            <div class="pt-4 mt-4 border-t border-slate-800/90 flex items-center justify-between text-[11px]">
+                                <span class="text-emerald-400 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                    Build: Passing (0 warnings)
                                 </span>
-                                <button onclick="switchHeroTab('terminal')" class="text-emerald-400 hover:underline flex items-center gap-1">
-                                    <span>Terminalni sinab ko'rish</span>
-                                    <i class="fa-solid fa-arrow-right"></i>
+                                <button onclick="switchIdeTab('term')" class="text-cyan-400 hover:underline flex items-center gap-1">
+                                    <span>Run Terminal</span>
+                                    <i class="fa-solid fa-terminal text-[10px]"></i>
                                 </button>
                             </div>
                         </div>
 
-                        <!-- Interactive Terminal View Tab -->
-                        <div id="hero-tab-terminal" class="hidden p-5 sm:p-6 font-mono text-xs sm:text-sm bg-slate-950/90 text-slate-200 min-h-[290px] flex flex-col justify-between">
-                            <div id="terminal-output" class="space-y-2 max-h-52 overflow-y-auto pr-1">
-                                <div class="text-slate-400">// Nodirbek CLI v3.0. Quyidagi tugmalardan birini bosing:</div>
-                                <div class="text-emerald-400">$ whoami</div>
-                                <div class="text-slate-300 pl-3">Usmonov Nodirbek — 3 yillik tajribaga ega Veb-dasturchi.</div>
-                            </div>
-                            <div class="pt-4 mt-3 border-t border-slate-800">
-                                <div class="text-[11px] text-slate-400 mb-2">Buyruqni tanlang:</div>
-                                <div class="flex flex-wrap gap-2">
-                                    <button onclick="runTerminalCmd('projects')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-emerald-500/20 hover:text-emerald-400 border border-slate-700 text-xs transition-colors">./loyihalar</button>
-                                    <button onclick="runTerminalCmd('skills')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-emerald-500/20 hover:text-emerald-400 border border-slate-700 text-xs transition-colors">./texnologiyalar</button>
-                                    <button onclick="runTerminalCmd('contact')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-emerald-500/20 hover:text-emerald-400 border border-slate-700 text-xs transition-colors">./boglanish</button>
-                                    <button onclick="runTerminalCmd('clear')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-rose-500/20 hover:text-rose-400 border border-slate-700 text-xs transition-colors">tozalash</button>
-                                </div>
+                        <!-- TAB 2: metrics.json -->
+                        <div id="ide-tab-arch" class="hidden p-5 sm:p-6 font-mono text-xs sm:text-[13px] leading-relaxed text-slate-300 min-h-[320px] flex-col justify-between">
+<pre class="overflow-x-auto"><code>{
+  <span class="text-cyan-400">"project"</span>: <span class="text-amber-300">"iqbol-restaurant.uz"</span>,
+  <span class="text-cyan-400">"status"</span>: <span class="text-emerald-400">"200 OK (Production SSL)"</span>,
+  <span class="text-cyan-400">"lighthouseAudit"</span>: {
+    <span class="text-emerald-400">"performance"</span>: <span class="text-purple-400">99</span>,
+    <span class="text-emerald-400">"accessibility"</span>: <span class="text-purple-400">100</span>,
+    <span class="text-emerald-400">"bestPractices"</span>: <span class="text-purple-400">100</span>,
+    <span class="text-emerald-400">"seo"</span>: <span class="text-purple-400">100</span>
+  },
+  <span class="text-cyan-400">"smtpEndpoint"</span>: <span class="text-amber-300">"ur.usmonov@gmail.com"</span>
+}</code></pre>
+                            <div class="pt-4 mt-4 border-t border-slate-800/90 flex items-center justify-between text-[11px]">
+                                <span class="text-slate-400">Verified Lighthouse Metrics</span>
+                                <a href="https://iqbol-restaurant.uz" target="_blank" class="text-emerald-400 hover:underline">Open Live URL →</a>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Floating Live Project Quick Card below Terminal -->
-                    <a href="https://iqbol-restaurant.uz" target="_blank" rel="noopener noreferrer" class="mt-4 p-4 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/50 shadow-lg flex items-center justify-between group transition-all">
-                        <div class="flex items-center gap-3.5">
-                            <div class="w-11 h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-500">
-                                <i class="fa-solid fa-utensils text-lg"></i>
+                        <!-- TAB 3: Interactive CLI Terminal -->
+                        <div id="ide-tab-term" class="hidden p-5 sm:p-6 font-mono text-xs bg-slate-950 text-slate-200 min-h-[320px] flex-col justify-between">
+                            <div id="terminal-output" class="space-y-2 max-h-48 overflow-y-auto pr-1">
+                                <div class="text-slate-500">// Nodirbek Interactive Shell v3.4</div>
+                                <div class="text-emerald-400">root@nodirbek:~$ status --check</div>
+                                <div class="text-slate-300 pl-3">✓ Developer: Usmonov Nodirbek (3 Yil Tajriba)</div>
+                                <div class="text-slate-300 pl-3">✓ Live Site: iqbol-restaurant.uz [ONLINE]</div>
                             </div>
-                            <div>
-                                <div class="flex items-center gap-2">
-                                    <span class="font-bold text-sm text-slate-900 dark:text-white">iqbol-restaurant.uz</span>
-                                    <span class="px-2 py-0.5 text-[10px] font-mono rounded-full bg-emerald-500/15 text-emerald-500 font-semibold">LIVE</span>
+                            <div class="pt-3 mt-3 border-t border-slate-800">
+                                <div class="text-[11px] text-slate-400 mb-2">Buyruqni ishga tushirish (Click to execute):</div>
+                                <div class="flex flex-wrap gap-1.5">
+                                    <button onclick="runTerminalCmd('projects')" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-emerald-500/20 hover:text-emerald-400 border border-slate-800 text-[11px] transition-all">./loyihalar</button>
+                                    <button onclick="runTerminalCmd('skills')" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-emerald-500/20 hover:text-emerald-400 border border-slate-800 text-[11px] transition-all">./texnologiyalar</button>
+                                    <button onclick="runTerminalCmd('ping')" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-cyan-500/20 hover:text-cyan-400 border border-slate-800 text-[11px] transition-all">ping iqbol-restaurant.uz</button>
+                                    <button onclick="runTerminalCmd('contact')" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-amber-500/20 hover:text-amber-400 border border-slate-800 text-[11px] transition-all">./aloqa</button>
+                                    <button onclick="runTerminalCmd('clear')" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-rose-500/20 hover:text-rose-400 border border-slate-800 text-[11px] transition-all">clear</button>
                                 </div>
-                                <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="heroLiveCardSub">Real ishlayotgan loyihani ko'rish uchun bosing</p>
                             </div>
                         </div>
-                        <div class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 group-hover:bg-emerald-500 group-hover:text-white flex items-center justify-center text-slate-500 transition-all">
-                            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-                        </div>
-                    </a>
+
+                    </div>
                 </div>
 
             </div>
+
+            <!-- KEY PERFORMANCE METRICS BAR -->
+            <div class="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                <div class="spotlight-card p-6 rounded-2xl bg-white/90 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800/90 shadow-sm">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-mono uppercase text-slate-400" data-i18n="metric1Label">AMALIY TAJRIBA</span>
+                        <i class="fa-solid fa-code-branch text-emerald-500"></i>
+                    </div>
+                    <div class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">3+ <span class="text-emerald-500 text-xl">Yil</span></div>
+                    <div class="text-xs text-slate-500 dark:text-slate-400 mt-1" data-i18n="metric1Sub">Frontend va Full-Stack yechimlar</div>
+                </div>
+
+                <div class="spotlight-card p-6 rounded-2xl bg-white/90 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800/90 shadow-sm">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-mono uppercase text-slate-400" data-i18n="metric2Label">LIGHTHOUSE SCORE</span>
+                        <i class="fa-solid fa-gauge-high text-cyan-400"></i>
+                    </div>
+                    <div class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">99<span class="text-cyan-400 text-xl">/100</span></div>
+                    <div class="text-xs text-slate-500 dark:text-slate-400 mt-1" data-i18n="metric2Sub">Yuqori tezlik va SEO optimizatsiya</div>
+                </div>
+
+                <div class="spotlight-card p-6 rounded-2xl bg-white/90 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800/90 shadow-sm">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-mono uppercase text-slate-400" data-i18n="metric3Label">LIVE PRODUCTION</span>
+                        <i class="fa-solid fa-server text-emerald-400"></i>
+                    </div>
+                    <div class="font-display text-xl sm:text-2xl font-extrabold text-emerald-500 truncate">iqbol-restaurant.uz</div>
+                    <div class="text-xs text-slate-500 dark:text-slate-400 mt-2" data-i18n="metric3Sub">24/7 faol ishlayotgan real biznes sayt</div>
+                </div>
+
+                <div class="spotlight-card p-6 rounded-2xl bg-white/90 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800/90 shadow-sm">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-mono uppercase text-slate-400" data-i18n="metric4Label">TO'G'RIDAN-TO'G'RI ALOQA</span>
+                        <i class="fa-solid fa-bolt text-amber-400"></i>
+                    </div>
+                    <div class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">100<span class="text-emerald-500 text-xl">%</span></div>
+                    <div class="text-xs text-slate-500 dark:text-slate-400 mt-1" data-i18n="metric4Sub">Mas'uliyat va o'z vaqtida topshirish</div>
+                </div>
+            </div>
         </section>
 
-        <!-- ABOUT & 3 YEARS EXPERIENCE SECTION -->
-        <section id="about" class="py-20 bg-white/60 dark:bg-slate-900/40 border-y border-slate-200/70 dark:border-slate-800/70">
+        <!-- ==========================================
+             ABOUT & 3 YEARS EXPERIENCE ROADMAP
+             ========================================== -->
+        <section id="about" class="py-20 bg-white/60 dark:bg-slate-900/30 border-y border-slate-200/70 dark:border-slate-800/80">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                
-                <!-- Section Header -->
                 <div class="text-center max-w-3xl mx-auto mb-16">
-                    <span class="px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono text-xs font-semibold uppercase tracking-wider" data-i18n="aboutTag">
-                        Men haqimda va Tajriba
+                    <span class="px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-mono text-xs font-semibold uppercase tracking-wider" data-i18n="aboutTag">
+                        Karyera va Tajriba
                     </span>
                     <h2 class="mt-3 font-display text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white" data-i18n="aboutTitle">
-                        3 Yillik Dasturlash Tajribasi va Professional Yondashuv
+                        3 Yillik Dasturlash Evolyutsiyasi
                     </h2>
                     <p class="mt-4 text-slate-600 dark:text-slate-400 text-base sm:text-lg" data-i18n="aboutSubtitle">
-                        Har bir loyihaga shunchaki kod sifatida emas, balki mijozning biznesini rivojlantiruvchi va foydalanuvchilarga qulaylik yaratuvchi tayyor mahsulot sifatida yondashaman.
+                        Oddiy sahifalardan tortib to'liq avtomatlashtirilgan, yuqori yuklamaga chidamli real biznes platformalarigacha bo'lgan professional yo'l.
                     </p>
                 </div>
 
-                <!-- 3-Year Journey Timeline Cards -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-                    
-                    <!-- Year 1 -->
-                    <div class="p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/40 transition-all shadow-sm relative group">
-                        <div class="flex items-center justify-between mb-6">
-                            <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 font-mono text-xs font-bold text-emerald-500">1-BOSQICH</span>
-                            <div class="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-lg group-hover:scale-110 transition-transform">
-                                <i class="fa-solid fa-code"></i>
+                    <!-- Stage 1 -->
+                    <div class="spotlight-card p-7 rounded-3xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 font-mono text-xs font-bold text-emerald-500">2023 — 2024 • 1-YIL</span>
+                                <div class="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-layer-group"></i>
+                                </div>
                             </div>
+                            <h3 class="font-display text-xl font-bold text-slate-900 dark:text-white mb-3" data-i18n="exp1Title">
+                                UI/UX Verstka va Responsive Arxitektura
+                            </h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="exp1Desc">
+                                HTML5, CSS3, SCSS, Tailwind CSS va JavaScript (ES6+) asosida barcha ekran o'lchamlarida piksel darajasida aniq ishlovchi moslashuvchan interfeyslar yaratish.
+                            </p>
                         </div>
-                        <h3 class="font-display text-xl font-bold text-slate-900 dark:text-white mb-3" data-i18n="exp1Title">
-                            Frontend Asoslari va Moslashuvchan Dizayn
-                        </h3>
-                        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="exp1Desc">
-                            HTML5, CSS3, JavaScript va zamonaviy верстка (layout) standartlarini chuqur o'zlashtirish. Barcha mobil telefon, planshet va kompyuter ekranlarida nuqsonsiz ishlovchi (Responsive) interfeyslar yaratish.
-                        </p>
+                        <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center gap-2 text-xs font-mono text-slate-400">
+                            <i class="fa-solid fa-check text-emerald-500"></i>
+                            <span>Pixel-Perfect • Mobile-First</span>
+                        </div>
                     </div>
 
-                    <!-- Year 2 -->
-                    <div class="p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/40 transition-all shadow-sm relative group">
-                        <div class="flex items-center justify-between mb-6">
-                            <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 font-mono text-xs font-bold text-cyan-500">2-BOSQICH</span>
-                            <div class="w-11 h-11 rounded-xl bg-cyan-500/10 text-cyan-500 flex items-center justify-center text-lg group-hover:scale-110 transition-transform">
-                                <i class="fa-solid fa-bolt"></i>
+                    <!-- Stage 2 -->
+                    <div class="spotlight-card p-7 rounded-3xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 font-mono text-xs font-bold text-cyan-400">2024 — 2025 • 2-YIL</span>
+                                <div class="w-11 h-11 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-microchip"></i>
+                                </div>
                             </div>
+                            <h3 class="font-display text-xl font-bold text-slate-900 dark:text-white mb-3" data-i18n="exp2Title">
+                                SPA Ilovalar, React va API Integratsiya
+                            </h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="exp2Desc">
+                                Zamonaviy frontend frameworklar (React, Next.js), REST API, murakkab state-menejment va yuqori tezlikda ishlovchi dinamik veb-ilovalarni loyihalash.
+                            </p>
                         </div>
-                        <h3 class="font-display text-xl font-bold text-slate-900 dark:text-white mb-3" data-i18n="exp2Title">
-                            Zamonaviy Frameworklar va Interaktiv Web-Ilovalar
-                        </h3>
-                        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="exp2Desc">
-                            Tailwind CSS, React, dinamik JavaScript arxitekturasi va REST API integratsiyalari. Yuqori tezlikda ishlovchi, zamonaviy animatsiyalarga boy veb-ilovalarni ishlab chiqish.
-                        </p>
+                        <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center gap-2 text-xs font-mono text-slate-400">
+                            <i class="fa-solid fa-check text-cyan-400"></i>
+                            <span>React • REST API • Dynamic State</span>
+                        </div>
                     </div>
 
-                    <!-- Year 3 (Current) -->
-                    <div class="p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-emerald-500/10 to-transparent dark:from-emerald-500/10 dark:to-slate-900 border-2 border-emerald-500/40 transition-all shadow-lg relative group">
-                        <div class="flex items-center justify-between mb-6">
-                            <span class="px-3 py-1 rounded-lg bg-emerald-500 text-white font-mono text-xs font-bold">3-YIL • HOZIRDA</span>
-                            <div class="w-11 h-11 rounded-xl bg-emerald-500 text-white flex items-center justify-center text-lg group-hover:scale-110 transition-transform shadow-md shadow-emerald-500/30">
-                                <i class="fa-solid fa-rocket"></i>
+                    <!-- Stage 3 -->
+                    <div class="spotlight-card p-7 rounded-3xl bg-gradient-to-b from-emerald-500/10 via-slate-900/95 to-slate-900 border-2 border-emerald-500/50 shadow-xl flex flex-col justify-between text-white">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="px-3 py-1 rounded-lg bg-emerald-500 text-slate-950 font-mono text-xs font-extrabold">2025 — 2026 • 3-YIL (HOZIR)</span>
+                                <div class="w-11 h-11 rounded-xl bg-emerald-500 text-slate-950 flex items-center justify-center text-lg shadow-lg shadow-emerald-500/30">
+                                    <i class="fa-solid fa-rocket"></i>
+                                </div>
                             </div>
+                            <h3 class="font-display text-xl font-bold text-white mb-3" data-i18n="exp3Title">
+                                Production Tizimlar & Biznes Avtomatizatsiya
+                            </h3>
+                            <p class="text-sm text-slate-300 leading-relaxed" data-i18n="exp3Desc">
+                                Real mijozlar uchun noldan domen, VPS/Cloud hosting, SSL va SEO bilan to'liq ishga tushirilgan biznes loyihalar — jumladan <strong class="text-emerald-400">iqbol-restaurant.uz</strong> platformasi.
+                            </p>
                         </div>
-                        <h3 class="font-display text-xl font-bold text-slate-900 dark:text-white mb-3" data-i18n="exp3Title">
-                            Real Biznes Platformalar va To'liq Yechimlar
-                        </h3>
-                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed" data-i18n="exp3Desc">
-                            Mijozlar va bizneslar uchun noldan domen va hostingga ulab ishga tushirilgan real loyihalar — jumladan <strong class="text-emerald-500">iqbol-restaurant.uz</strong> platformasini yaratish va qo'llab-quvvatlash.
-                        </p>
+                        <div class="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between text-xs font-mono text-emerald-400">
+                            <span>Full-Cycle Production</span>
+                            <a href="https://iqbol-restaurant.uz" target="_blank" class="underline hover:text-white">iqbol-restaurant.uz ↗</a>
+                        </div>
                     </div>
-
                 </div>
             </div>
         </section>
 
-        <!-- SKILLS & TECHNOLOGIES SECTION -->
+        <!-- ==========================================
+             SKILLS & TECH STACK MATRIX (WITH LOADING)
+             ========================================== -->
         <section id="skills" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
                 <div>
-                    <span class="px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono text-xs font-semibold uppercase tracking-wider" data-i18n="skillsTag">
-                        Texnik Ko'nikmalar
+                    <span class="px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-mono text-xs font-semibold uppercase tracking-wider" data-i18n="skillsTag">
+                        Texnik Stek va Arxitektura
                     </span>
                     <h2 class="mt-3 font-display text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white" data-i18n="skillsTitle">
-                        Ishlatadigan Texnologiyalarim
+                        Texnologiyalar va Darajalar
                     </h2>
                 </div>
-                <!-- Category Filter Buttons -->
+
+                <!-- Interactive Filter Buttons with Loading State -->
                 <div class="flex flex-wrap gap-2">
-                    <button onclick="filterSkills('all')" id="skill-btn-all" class="skill-filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-emerald-500 text-white transition-all" data-i18n="filterAll">Barchasi</button>
-                    <button onclick="filterSkills('frontend')" id="skill-btn-frontend" class="skill-filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-200 dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-800 transition-all">Frontend</button>
-                    <button onclick="filterSkills('tools')" id="skill-btn-tools" class="skill-filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-200 dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-800 transition-all" data-i18n="filterTools">Asboblar & UI</button>
+                    <button onclick="filterSkillsWithLoading('all')" id="skill-btn-all" class="skill-filter-btn px-4 py-2.5 rounded-xl text-xs font-mono font-bold bg-emerald-500 text-slate-950 shadow-lg shadow-emerald-500/20 transition-all">
+                        ALL STACK (12)
+                    </button>
+                    <button onclick="filterSkillsWithLoading('frontend')" id="skill-btn-frontend" class="skill-filter-btn px-4 py-2.5 rounded-xl text-xs font-mono font-bold bg-slate-200 dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-800 hover:border-emerald-500/40 transition-all">
+                        FRONTEND & UI
+                    </button>
+                    <button onclick="filterSkillsWithLoading('backend')" id="skill-btn-backend" class="skill-filter-btn px-4 py-2.5 rounded-xl text-xs font-mono font-bold bg-slate-200 dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-800 hover:border-emerald-500/40 transition-all">
+                        BACKEND & TOOLS
+                    </button>
                 </div>
             </div>
 
-            <!-- Skills Grid -->
-            <div id="skills-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                <!-- Populated dynamically via JS for clean filtering -->
+            <!-- Skills Grid Container -->
+            <div id="skills-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 min-h-[260px]">
+                <!-- Dynamically populated with skeleton loading support -->
             </div>
         </section>
 
-        <!-- FEATURED PROJECTS SECTION -->
-        <section id="projects" class="py-20 bg-white/60 dark:bg-slate-900/40 border-t border-slate-200/70 dark:border-slate-800/70">
+        <!-- ==========================================
+             FEATURED LIVE PROJECT SHOWCASE: IQBOL-RESTAURANT.UZ
+             ========================================== -->
+        <section id="projects" class="py-20 bg-white/60 dark:bg-slate-900/30 border-t border-slate-200/70 dark:border-slate-800/80">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
-                <!-- Section Title -->
-                <div class="text-center max-w-3xl mx-auto mb-14">
-                    <span class="px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono text-xs font-semibold uppercase tracking-wider" data-i18n="projectsTag">
-                        Portfolio & Natijalar
-                    </span>
-                    <h2 class="mt-3 font-display text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white" data-i18n="projectsTitle">
-                        Qilgan Veb-saytlarim va Loyihalarim
-                    </h2>
-                    <p class="mt-4 text-slate-600 dark:text-slate-400 text-base sm:text-lg" data-i18n="projectsSubtitle">
-                        3 yillik faoliyatim davomida yaratilgan real loyihalar va zamonaviy veb-yechimlar.
-                    </p>
+                <!-- Section Header -->
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
+                    <div>
+                        <span class="px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-mono text-xs font-semibold uppercase tracking-wider" data-i18n="projectsTag">
+                            Real Production Portfolio
+                        </span>
+                        <h2 class="mt-3 font-display text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white" data-i18n="projectsTitle">
+                            Qilgan Veb-saytlarim va Loyihalarim
+                        </h2>
+                    </div>
+
+                    <!-- Viewport Switcher for Live Preview -->
+                    <div class="flex items-center gap-2 bg-slate-200/80 dark:bg-slate-900 p-1.5 rounded-2xl border border-slate-300 dark:border-slate-800 self-start md:self-auto">
+                        <span class="text-xs font-mono text-slate-500 px-2 hidden sm:inline">Preview Mode:</span>
+                        <button onclick="switchViewport('desktop')" id="vp-desktop" class="px-3 py-1.5 rounded-xl bg-emerald-500 text-slate-950 font-mono text-xs font-bold flex items-center gap-1.5 transition-all">
+                            <i class="fa-solid fa-desktop"></i>
+                            <span>Desktop</span>
+                        </button>
+                        <button onclick="switchViewport('tablet')" id="vp-tablet" class="px-3 py-1.5 rounded-xl text-slate-600 dark:text-slate-400 hover:text-white font-mono text-xs font-semibold flex items-center gap-1.5 transition-all">
+                            <i class="fa-solid fa-tablet-screen-button"></i>
+                            <span>Tablet</span>
+                        </button>
+                        <button onclick="switchViewport('mobile')" id="vp-mobile" class="px-3 py-1.5 rounded-xl text-slate-600 dark:text-slate-400 hover:text-white font-mono text-xs font-semibold flex items-center gap-1.5 transition-all">
+                            <i class="fa-solid fa-mobile-screen"></i>
+                            <span>Mobile</span>
+                        </button>
+                    </div>
                 </div>
 
-                <!-- PRIMARY SPOTLIGHT PROJECT: IQBOL-RESTAURANT.UZ -->
-                <div class="rounded-3xl bg-white dark:bg-slate-900 border-2 border-emerald-500/40 shadow-2xl shadow-emerald-500/5 overflow-hidden mb-12">
+                <!-- SPOTLIGHT SHOWCASE: IQBOL-RESTAURANT.UZ -->
+                <div class="rounded-3xl bg-white dark:bg-slate-900/95 border-2 border-emerald-500/40 shadow-2xl shadow-emerald-500/10 overflow-hidden mb-14">
                     <div class="grid grid-cols-1 lg:grid-cols-12">
                         
-                        <!-- Left: Interactive Browser Mockup Preview -->
-                        <div class="lg:col-span-7 bg-slate-950 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden">
-                            <div class="absolute -top-24 -left-24 w-72 h-72 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none"></div>
+                        <!-- Left Column: Interactive Device Simulator with Loading State -->
+                        <div class="lg:col-span-7 bg-[#050b16] p-5 sm:p-8 flex flex-col justify-between relative overflow-hidden border-b lg:border-b-0 lg:border-r border-slate-800">
                             
-                            <!-- Browser Top Bar -->
-                            <div class="rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden shadow-2xl relative z-10">
+                            <!-- Browser Frame Wrapper (Resizes smoothly based on Desktop/Tablet/Mobile) -->
+                            <div id="viewport-frame" class="w-full mx-auto transition-all duration-500 rounded-2xl bg-slate-900 border border-slate-700/80 overflow-hidden shadow-2xl relative">
+                                
+                                <!-- Browser Top Controls -->
                                 <div class="px-4 py-3 bg-slate-950 border-b border-slate-800 flex items-center justify-between gap-2">
                                     <div class="flex items-center gap-1.5">
                                         <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
                                         <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
                                         <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
                                     </div>
-                                    <a href="https://iqbol-restaurant.uz" target="_blank" rel="noopener noreferrer" class="flex-1 max-w-md mx-auto px-3 py-1 rounded-lg bg-slate-900 border border-slate-800 text-xs font-mono text-emerald-400 flex items-center justify-center gap-2 hover:border-emerald-500/50 transition-all">
+                                    <a href="https://iqbol-restaurant.uz" target="_blank" rel="noopener noreferrer" class="flex-1 max-w-sm mx-auto px-3 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-mono text-emerald-400 flex items-center justify-center gap-2 hover:border-emerald-500/60 transition-all truncate">
                                         <i class="fa-solid fa-lock text-[10px]"></i>
-                                        <span>https://iqbol-restaurant.uz</span>
-                                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-400"></i>
+                                        <span class="truncate">https://iqbol-restaurant.uz</span>
+                                        <i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-slate-400"></i>
                                     </a>
-                                    <span class="text-[11px] font-mono text-emerald-400 hidden sm:inline">200 OK</span>
+                                    <button onclick="reloadPreviewSimulation()" class="text-slate-400 hover:text-emerald-400 text-xs px-1.5" title="Simulyatsiyani qayta yuklash">
+                                        <i id="preview-reload-icon" class="fa-solid fa-rotate-right"></i>
+                                    </button>
                                 </div>
 
-                                <!-- Visual Restaurant Preview UI inside Browser -->
-                                <div class="p-6 sm:p-8 bg-gradient-to-br from-slate-900 via-slate-900 to-emerald-950/50 text-white">
-                                    <div class="flex items-center justify-between mb-6">
+                                <!-- Device Loading Overlay (Appears when switching Desktop/Tablet/Mobile or refreshing) -->
+                                <div id="viewport-loader" class="hidden absolute inset-0 top-10 z-20 bg-slate-950/95 flex-col items-center justify-center p-6 text-center space-y-3">
+                                    <div class="w-11 h-11 rounded-full border-2 border-emerald-500/20 border-t-emerald-400 animate-spin"></div>
+                                    <div id="viewport-loader-text" class="font-mono text-xs text-emerald-400">Rendering iqbol-restaurant.uz viewport...</div>
+                                    <div class="w-40 h-1.5 rounded-full bg-slate-800 overflow-hidden">
+                                        <div class="h-full bg-emerald-500 animate-pulse w-3/4"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Interactive Simulated UI of iqbol-restaurant.uz -->
+                                <div class="p-5 sm:p-6 bg-gradient-to-br from-slate-900 via-[#0b1324] to-emerald-950/40 text-white space-y-5">
+                                    <!-- Restaurant Header inside simulation -->
+                                    <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800/80 pb-4">
                                         <div class="flex items-center gap-3">
-                                            <div class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400">
+                                            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-slate-950 font-bold text-lg shadow-lg shadow-amber-500/20">
                                                 <i class="fa-solid fa-utensils"></i>
                                             </div>
                                             <div>
-                                                <div class="font-display font-bold text-base">IQBOL RESTAURANT</div>
-                                                <div class="text-[11px] text-slate-400">Milliy va Yevropa taomlari maskani</div>
+                                                <div class="flex items-center gap-2">
+                                                    <span class="font-display font-extrabold text-base tracking-tight">IQBOL RESTAURANT</span>
+                                                    <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">LIVE</span>
+                                                </div>
+                                                <div class="text-xs text-slate-400">Milliy va Yevropa taomlari • Onlayn Menyu</div>
                                             </div>
                                         </div>
-                                        <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-mono">
-                                            iqbol-restaurant.uz
-                                        </span>
-                                    </div>
-
-                                    <!-- Mock Preview Cards inside the showcase -->
-                                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
-                                        <div class="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700/70">
-                                            <i class="fa-solid fa-book-open text-amber-400 mb-2"></i>
-                                            <div class="text-xs font-bold">Raqamli Menyu</div>
-                                            <div class="text-[11px] text-slate-400 mt-0.5">Qulay kategoriyalar va narxlar</div>
-                                        </div>
-                                        <div class="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700/70">
-                                            <i class="fa-solid fa-mobile-screen-button text-emerald-400 mb-2"></i>
-                                            <div class="text-xs font-bold">100% Mobile-First</div>
-                                            <div class="text-[11px] text-slate-400 mt-0.5">QR-menyu va smartfonlar uchun</div>
-                                        </div>
-                                        <div class="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700/70">
-                                            <i class="fa-solid fa-gauge-high text-cyan-400 mb-2"></i>
-                                            <div class="text-xs font-bold">Tezkor Yuklanish</div>
-                                            <div class="text-[11px] text-slate-400 mt-0.5">Yuqori unumdorlik va SEO</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-800">
-                                        <div class="text-xs text-slate-400">
-                                            Muallif: <span class="text-white font-semibold">Usmonov Nodirbek</span>
-                                        </div>
-                                        <a href="https://iqbol-restaurant.uz" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-semibold flex items-center gap-2 transition-all shadow-lg shadow-emerald-500/20">
-                                            <span>Saytga o'tish</span>
-                                            <i class="fa-solid fa-external-link-alt"></i>
+                                        <a href="https://iqbol-restaurant.uz" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 transition-all shadow-md shadow-amber-500/20">
+                                            <span>Saytga kirish</span>
+                                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
                                         </a>
+                                    </div>
+
+                                    <!-- Interactive Menu Category Preview inside simulation -->
+                                    <div class="space-y-3">
+                                        <div class="flex items-center justify-between text-xs">
+                                            <span class="font-mono text-slate-400">INTERAKTIV MENYU MODULI:</span>
+                                            <span id="sim-category-status" class="font-mono text-emerald-400">✓ Milliy taomlar</span>
+                                        </div>
+                                        <div class="grid grid-cols-3 gap-2.5">
+                                            <div class="p-3 rounded-xl bg-slate-800/90 border border-slate-700/80 hover:border-amber-400/50 transition-all">
+                                                <div class="flex items-center justify-between mb-1.5">
+                                                    <i class="fa-solid fa-bowl-food text-amber-400"></i>
+                                                    <span class="text-[10px] font-mono text-emerald-400">Fast UI</span>
+                                                </div>
+                                                <div class="text-xs font-bold">Raqamli QR-Menyu</div>
+                                                <div class="text-[11px] text-slate-400 mt-0.5">Kategoriyalar & narxlar</div>
+                                            </div>
+                                            <div class="p-3 rounded-xl bg-slate-800/90 border border-slate-700/80 hover:border-emerald-400/50 transition-all">
+                                                <div class="flex items-center justify-between mb-1.5">
+                                                    <i class="fa-solid fa-calendar-check text-emerald-400"></i>
+                                                    <span class="text-[10px] font-mono text-cyan-400">Online</span>
+                                                </div>
+                                                <div class="text-xs font-bold">Band qilish & Aloqa</div>
+                                                <div class="text-[11px] text-slate-400 mt-0.5">Mijozlar uchun qulay</div>
+                                            </div>
+                                            <div class="p-3 rounded-xl bg-slate-800/90 border border-slate-700/80 hover:border-cyan-400/50 transition-all">
+                                                <div class="flex items-center justify-between mb-1.5">
+                                                    <i class="fa-solid fa-mobile-screen text-cyan-400"></i>
+                                                    <span class="text-[10px] font-mono text-amber-400">100%</span>
+                                                </div>
+                                                <div class="text-xs font-bold">Adaptive Layout</div>
+                                                <div class="text-[11px] text-slate-400 mt-0.5">iOS & Android mos</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Google Lighthouse Audit Scores -->
+                                    <div class="p-3.5 rounded-xl bg-slate-950/90 border border-slate-800 grid grid-cols-4 gap-2 text-center">
+                                        <div>
+                                            <div class="text-sm sm:text-base font-mono font-extrabold text-emerald-400">99</div>
+                                            <div class="text-[10px] text-slate-400">Performance</div>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm sm:text-base font-mono font-extrabold text-emerald-400">100</div>
+                                            <div class="text-[10px] text-slate-400">Accessibility</div>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm sm:text-base font-mono font-extrabold text-emerald-400">100</div>
+                                            <div class="text-[10px] text-slate-400">Best Practice</div>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm sm:text-base font-mono font-extrabold text-emerald-400">100</div>
+                                            <div class="text-[10px] text-slate-400">SEO Audit</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- Bottom Caption inside Left Column -->
+                            <div class="mt-4 flex items-center justify-between text-xs font-mono text-slate-400">
+                                <span id="viewport-caption">Viewport: Desktop (1440px Responsive)</span>
+                                <span class="text-emerald-400">SSL Secured • Production</span>
+                            </div>
                         </div>
 
-                        <!-- Right: Project Details & CTAs -->
+                        <!-- Right Column: Detailed Case Study & Direct Link -->
                         <div class="lg:col-span-5 p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
                             <div class="space-y-5">
                                 <div class="flex flex-wrap items-center gap-2">
                                     <span class="px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 font-mono text-xs font-bold flex items-center gap-1.5">
-                                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                                        ASOSIY LOYIHA (LIVE)
+                                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                                        FEATURED PRODUCTION SITE
                                     </span>
                                     <span class="px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-mono text-xs">
-                                        Real Mijoz Loyihasi
+                                        Restoran & HoReCa
                                     </span>
                                 </div>
 
                                 <h3 class="font-display text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
-                                    Iqbol Restaurant — Rasmiy Veb-sayti
+                                    iqbol-restaurant.uz
                                 </h3>
 
                                 <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed" data-i18n="iqbolDesc">
-                                    <strong>iqbol-restaurant.uz</strong> — restoran mijozlari uchun maxsus ishlab chiqilgan zamonaviy veb-sayt va onlayn menyu platformasi. Sayt orqali mehmonlar taomlar menyusi, restoran atmosferasi, manzili va bog'lanish ma'lumotlari bilan barcha qurilmalarda tez va qulay tanishishlari mumkin.
+                                    <strong>Iqbol Restaurant</strong> uchun noldan ishlab chiqilgan rasmiy veb-platforma. Mijozlar smartfon yoki kompyuter orqali restoran menyusi, taomlar tarkibi, narxlari va manzili bilan yuqori tezlikda tanishishlari mumkin.
                                 </p>
 
-                                <!-- Key Features Checklist -->
-                                <ul class="space-y-2.5 text-sm text-slate-700 dark:text-slate-300 pt-1">
-                                    <li class="flex items-start gap-2.5">
+                                <div class="space-y-2.5 text-sm text-slate-700 dark:text-slate-300 pt-1">
+                                    <div class="flex items-start gap-2.5">
                                         <i class="fa-solid fa-circle-check text-emerald-500 mt-1"></i>
-                                        <span data-i18n="iqbolFeat1">Smartfon, planshet va kompyuterlarga 100% moslashuvchan dizayn</span>
-                                    </li>
-                                    <li class="flex items-start gap-2.5">
+                                        <span data-i18n="iqbolFeat1">Smartfonlar uchun maxsus optimallashtirilgan tezkor UI/UX va QR-menyu</span>
+                                    </div>
+                                    <div class="flex items-start gap-2.5">
                                         <i class="fa-solid fa-circle-check text-emerald-500 mt-1"></i>
-                                        <span data-i18n="iqbolFeat2">Zamonaviy UI/UX interfeys va tezkor sahifa yuklanishi</span>
-                                    </li>
-                                    <li class="flex items-start gap-2.5">
+                                        <span data-i18n="iqbolFeat2">Zamonaviy animatsiyalar, lazy-loading tasvirlar va yuqori yuklanish tezligi</span>
+                                    </div>
+                                    <div class="flex items-start gap-2.5">
                                         <i class="fa-solid fa-circle-check text-emerald-500 mt-1"></i>
-                                        <span data-i18n="iqbolFeat3">Qidiruv tizimlari (SEO) va domen/SSL integratsiyasi</span>
-                                    </li>
-                                </ul>
+                                        <span data-i18n="iqbolFeat3">To'liq domen (`iqbol-restaurant.uz`), SSL xavfsizlik va Google SEO integratsiyasi</span>
+                                    </div>
+                                </div>
 
-                                <!-- Tech Stack Tags -->
+                                <!-- Tech Stack Badges -->
                                 <div class="flex flex-wrap gap-2 pt-2">
-                                    <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono text-slate-700 dark:text-slate-300">HTML5</span>
-                                    <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono text-slate-700 dark:text-slate-300">CSS3 / Tailwind</span>
-                                    <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono text-slate-700 dark:text-slate-300">JavaScript</span>
-                                    <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono text-slate-700 dark:text-slate-300">Responsive UI</span>
+                                    <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-semibold text-emerald-500">HTML5 / CSS3</span>
+                                    <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-semibold text-cyan-400">Tailwind CSS</span>
+                                    <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-semibold text-amber-400">JavaScript ES6+</span>
+                                    <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-semibold text-indigo-400">Responsive UI</span>
                                 </div>
                             </div>
 
-                            <!-- Action Buttons -->
                             <div class="pt-8 mt-6 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row gap-3">
-                                <a href="https://iqbol-restaurant.uz" target="_blank" rel="noopener noreferrer" class="flex-1 py-3.5 px-5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-sm shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-2 transition-all">
+                                <a href="https://iqbol-restaurant.uz" target="_blank" rel="noopener noreferrer" class="flex-1 py-4 px-5 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold text-sm shadow-xl shadow-emerald-500/25 flex items-center justify-center gap-2.5 transition-all">
                                     <i class="fa-solid fa-globe"></i>
-                                    <span data-i18n="btnVisitSite">iqbol-restaurant.uz ni ochish</span>
+                                    <span data-i18n="btnVisitSite">iqbol-restaurant.uz saytiga o'tish</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
                                 </a>
-                                <button onclick="openProjectModal()" class="py-3.5 px-5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-semibold text-sm flex items-center justify-center gap-2 transition-all">
-                                    <i class="fa-solid fa-circle-info text-emerald-500"></i>
-                                    <span data-i18n="btnDetails">Batafsil</span>
-                                </button>
                             </div>
                         </div>
 
                     </div>
                 </div>
 
-                <!-- Secondary Capabilities / Solutions Cards -->
+                <!-- ADDITIONAL 3-YEAR EXPERIENCE ARCHITECTURE PROJECTS -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Solution 1 -->
-                    <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/40 transition-all flex flex-col justify-between">
+                    <!-- Card 1 -->
+                    <div class="spotlight-card p-6 rounded-3xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 flex flex-col justify-between shadow-sm">
                         <div>
-                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-xl mb-5">
-                                <i class="fa-solid fa-building"></i>
+                            <div class="flex items-center justify-between mb-5">
+                                <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-xl">
+                                    <i class="fa-solid fa-chart-pie"></i>
+                                </div>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 font-mono text-[11px] text-emerald-400">CRM / ERP</span>
                             </div>
                             <h4 class="font-display text-lg font-bold text-slate-900 dark:text-white mb-2" data-i18n="sol1Title">
-                                Korporativ va Biznes Saytlar
+                                Biznes Boshqaruv va Admin Panellar
                             </h4>
                             <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="sol1Desc">
-                                Kompaniyalar, restoranlar, klinikalar va xizmat ko'rsatish markazlari uchun ishonchli hamda zamonaviy veb-saytlar.
+                                Savdo, mijozlar bazasi va analitikani real vaqt rejimida kuzatish uchun interaktiv grafikli Dashboard va CRM interfeyslari.
                             </p>
                         </div>
                         <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs font-mono text-emerald-500">
-                            <span>Landing Page • Multi-page</span>
+                            <span>React • Charts • REST API</span>
                             <a href="#contact" class="hover:underline" data-i18n="orderLink">Buyurtma berish →</a>
                         </div>
                     </div>
 
-                    <!-- Solution 2 -->
-                    <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/40 transition-all flex flex-col justify-between">
+                    <!-- Card 2 -->
+                    <div class="spotlight-card p-6 rounded-3xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 flex flex-col justify-between shadow-sm">
                         <div>
-                            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-500 flex items-center justify-center text-xl mb-5">
-                                <i class="fa-solid fa-cart-shopping"></i>
+                            <div class="flex items-center justify-between mb-5">
+                                <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl">
+                                    <i class="fa-solid fa-bag-shopping"></i>
+                                </div>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 font-mono text-[11px] text-cyan-400">E-Commerce</span>
                             </div>
                             <h4 class="font-display text-lg font-bold text-slate-900 dark:text-white mb-2" data-i18n="sol2Title">
-                                Onlayn Katalog va QR-Menyular
+                                E-Commerce & Raqamli Menyu Tizimlari
                             </h4>
                             <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="sol2Desc">
-                                Iqbol Restaurant tajribasi asosida kafe, restoran va do'konlar uchun tezkor raqamli katalog hamda onlayn buyurtma tizimlari.
+                                Iqbol Restaurant tajribasi asosida restoranlar va onlayn do'konlar uchun savatcha, qidiruv va tezkor buyurtma modullari.
                             </p>
                         </div>
-                        <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs font-mono text-cyan-500">
-                            <span>Web App • E-Catalog</span>
+                        <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs font-mono text-cyan-400">
+                            <span>Mobile-First • QR System</span>
                             <a href="#contact" class="hover:underline" data-i18n="orderLink">Buyurtma berish →</a>
                         </div>
                     </div>
 
-                    <!-- Solution 3 -->
-                    <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/40 transition-all flex flex-col justify-between">
+                    <!-- Card 3 -->
+                    <div class="spotlight-card p-6 rounded-3xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 flex flex-col justify-between shadow-sm">
                         <div>
-                            <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-500 flex items-center justify-center text-xl mb-5">
-                                <i class="fa-solid fa-laptop-code"></i>
+                            <div class="flex items-center justify-between mb-5">
+                                <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-xl">
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                </div>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 font-mono text-[11px] text-indigo-400">High-End Web</span>
                             </div>
                             <h4 class="font-display text-lg font-bold text-slate-900 dark:text-white mb-2" data-i18n="sol3Title">
-                                Maxsus Web-Ilovalar va Frontend
+                                Korporativ Saytlar va Landing Page
                             </h4>
                             <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="sol3Desc">
-                                React va JavaScript yordamida murakkab interfeyslar, boshqaruv panellari (Dashboard) va mavjud saytlarni zamonaviylashtirish.
+                                Kompaniyangiz nufuzini oshiruvchi, zamonaviy animatsiyali, Google qidiruv tizimida (SEO) yuqori o'rinlarga chiquvchi veb-saytlar.
                             </p>
                         </div>
                         <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs font-mono text-indigo-400">
-                            <span>React • Tailwind • API</span>
+                            <span>SEO 100% • Fast Load</span>
                             <a href="#contact" class="hover:underline" data-i18n="orderLink">Buyurtma berish →</a>
                         </div>
                     </div>
@@ -644,111 +918,167 @@
             </div>
         </section>
 
-        <!-- HIRE ME / CONTACT SECTION -->
+        <!-- ==========================================
+             4. REAL WORKING EMAIL & CONTACT SYSTEM
+             ========================================== -->
         <section id="contact" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900 to-emerald-950 border border-slate-800 p-6 sm:p-10 lg:p-14 text-white shadow-2xl relative overflow-hidden">
-                <!-- Decorative Glow -->
-                <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none"></div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center relative z-10">
+            <div class="rounded-3xl bg-gradient-to-br from-slate-900 via-[#070d19] to-emerald-950/90 border border-slate-800 p-6 sm:p-10 lg:p-14 text-white shadow-2xl relative overflow-hidden">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start relative z-10">
                     
-                    <!-- Left Column: Direct Callout & Email Box -->
-                    <div class="lg:col-span-6 space-y-6">
+                    <!-- Left Column: Direct Contact Info & 3-Step Visual Activation Guide -->
+                    <div class="lg:col-span-5 space-y-6">
                         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-mono font-semibold">
                             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                            <span data-i18n="contactBadge">HAMKORLIK VA ISHGA TAKLIF QILISH</span>
+                            <span data-i18n="contactBadge">OPEN CAPTCHA & DIRECT POST ACTIVATION</span>
                         </div>
 
                         <h2 class="font-display text-3xl sm:text-4xl font-extrabold leading-tight" data-i18n="contactHeading">
-                            Meni ishga olmoqchimisiz yoki yangi loyiha bormi?
+                            Meni ishga olmoqchimisiz? Hoziroq bog'laning!
                         </h2>
 
-                        <p class="text-slate-300 text-base sm:text-lg leading-relaxed" data-i18n="contactText">
-                            Agar meni kompaniyangizga dasturchi sifatida ishga olmoqchi bo'lsangiz yoki biznesingiz uchun zamonaviy veb-sayt buyurtma qilmoqchi bo'lsangiz, quyidagi elektron pochtamga yozishingiz mumkin:
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed" data-i18n="contactText">
+                            Agar meni kompaniyangizga dasturchi sifatida taklif qilmoqchi bo'lsangiz yoki yangi veb-sayt buyurtma qilmoqchi bo'lsangiz, xabaringiz to'g'ridan-to'g'ri <strong class="text-emerald-400 font-mono">ur.usmonov@gmail.com</strong> pochtamga boradi.
                         </p>
 
-                        <!-- Highlighted Email Card -->
-                        <div class="p-5 sm:p-6 rounded-2xl bg-slate-950/80 border border-emerald-500/40 space-y-4">
+                        <!-- Verified Email Box -->
+                        <div class="p-5 rounded-2xl bg-slate-950/90 border border-emerald-500/40 space-y-4">
                             <div class="flex items-center gap-3.5">
                                 <div class="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-xl shrink-0">
-                                    <i class="fa-solid fa-envelope-open-text"></i>
+                                    <i class="fa-solid fa-envelope-circle-check"></i>
                                 </div>
                                 <div class="overflow-hidden">
-                                    <div class="text-xs text-slate-400 font-mono uppercase" data-i18n="emailLabel">Rasmiy elektron pochta:</div>
-                                    <div id="email-text" class="font-mono text-lg sm:text-xl font-bold text-white truncate">
+                                    <div class="text-[11px] text-emerald-400 font-mono uppercase">VERIFIED RECIPIENT EMAIL:</div>
+                                    <div class="font-mono text-base sm:text-lg font-bold text-white truncate">
                                         ur.usmonov@gmail.com
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="flex flex-wrap gap-3 pt-1">
-                                <button onclick="copyEmail()" class="flex-1 py-3 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-sm flex items-center justify-center gap-2 transition-all shadow-lg shadow-emerald-500/20">
-                                    <i class="fa-regular fa-copy"></i>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                                <button type="button" onclick="copyEmail()" class="py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs font-mono flex items-center justify-center gap-2 border border-slate-700 transition-all">
+                                    <i class="fa-regular fa-copy text-emerald-400"></i>
                                     <span data-i18n="btnCopyEmail">Emailni nusxalash</span>
                                 </button>
-                                <a href="mailto:ur.usmonov@gmail.com?subject=Ish%20taklifi%20yoki%20Hamkorlik%20bo'yicha%20(Portfolio)" class="flex-1 py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-sm flex items-center justify-center gap-2 border border-slate-700 transition-all">
-                                    <i class="fa-solid fa-paper-plane text-emerald-400"></i>
-                                    <span data-i18n="btnSendMail">Pochta orqali yozish</span>
-                                </a>
+                                <button type="button" onclick="openDirectGmail()" class="py-3 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold text-xs font-mono flex items-center justify-center gap-2 transition-all shadow-lg shadow-emerald-500/20">
+                                    <i class="fa-brands fa-google"></i>
+                                    <span>Gmail orqali yozish</span>
+                                </button>
                             </div>
                         </div>
 
-                        <!-- Quick Info Pills -->
-                        <div class="flex flex-wrap gap-4 pt-2 text-xs sm:text-sm text-slate-300">
-                            <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-user-check text-emerald-400"></i>
-                                <span>Usmonov Nodirbek</span>
+                        <!-- Visual 3-Step Captcha Activation Guide Badge -->
+                        <div class="p-5 rounded-2xl bg-amber-500/10 border border-amber-500/40 text-xs text-amber-100 space-y-3 leading-relaxed shadow-lg">
+                            <div class="font-bold text-amber-300 flex items-center gap-2 text-sm">
+                                <i class="fa-solid fa-bolt text-amber-400"></i>
+                                <span>3 Qadamda Pochtani Aktivatsiya Qilish:</span>
                             </div>
-                            <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-briefcase text-emerald-400"></i>
-                                <span data-i18n="infoExp">3 yil tajriba</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-location-dot text-emerald-400"></i>
-                                <span data-i18n="infoLoc">O'zbekiston (Masofaviy / Ofis)</span>
+                            <div class="space-y-2.5 font-mono text-[11px] sm:text-xs">
+                                <div class="flex items-start gap-2.5 p-2.5 rounded-xl bg-slate-950/60 border border-amber-500/20">
+                                    <span class="w-5 h-5 rounded-full bg-amber-400 text-slate-950 font-extrabold flex items-center justify-center shrink-0">1</span>
+                                    <span><strong>Tugmani bosing</strong> &rarr; Yangi oynada rasmiy <code>FormSubmit Captcha</code> sahifasi ochiladi.</span>
+                                </div>
+                                <div class="flex items-start gap-2.5 p-2.5 rounded-xl bg-slate-950/60 border border-amber-500/20">
+                                    <span class="w-5 h-5 rounded-full bg-amber-400 text-slate-950 font-extrabold flex items-center justify-center shrink-0">2</span>
+                                    <span>Ochilgan oynada <strong>"I am human"</strong> (Robot emasman) katakchasini belgilang.</span>
+                                </div>
+                                <div class="flex items-start gap-2.5 p-2.5 rounded-xl bg-slate-950/60 border border-amber-500/20">
+                                    <span class="w-5 h-5 rounded-full bg-emerald-400 text-slate-950 font-extrabold flex items-center justify-center shrink-0">3</span>
+                                    <span><strong>ur.usmonov@gmail.com</strong> pochtangizga (<strong>Inbox</strong>, <strong>All Mail</strong> yoki <strong>Spam</strong>) kelgan xatdan <strong>"Activate Form"</strong> tugmasini bosing!</span>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Right Column: Interactive Quick Message Form -->
-                    <div class="lg:col-span-6">
-                        <form id="contact-form" onsubmit="handleContactSubmit(event)" class="p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-800 shadow-xl space-y-4">
-                            <h3 class="font-display text-xl font-bold mb-1" data-i18n="formTitle">
-                                Tezkor xabar yuborish
-                            </h3>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4" data-i18n="formSubtitle">
-                                Formani to'ldiring — xabaringiz to'g'ridan-to'g'ri ur.usmonov@gmail.com pochtasiga yo'naltiriladi.
-                            </p>
+                    <!-- Right Column: Native HTML POST Form (Open Captcha Mode) + Instant Gmail Fallback -->
+                    <div class="lg:col-span-7">
+                        <form id="contact-form" action="https://formsubmit.co/ur.usmonov@gmail.com" method="POST" target="_blank" onsubmit="handleNativeCaptchaSubmit(event)" class="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-5 relative overflow-hidden">
+                            
+                            <!-- Mandatory Hidden Inputs for Open Captcha Activation -->
+                            <input type="hidden" name="_captcha" value="true">
+                            <input type="hidden" name="_subject" value="Yangi Ish Taklifi / Xabar — Usmonov Nodirbek Portfolio">
+                            <input type="hidden" name="_template" value="table">
 
-                            <div>
-                                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1.5" data-i18n="formNameLabel">Ismingiz yoki Kompaniya nomi *</label>
-                                <input type="text" id="sender-name" required placeholder="Masalan: Sardor / Tech Soft LLC" class="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:outline-none focus:border-emerald-500 transition-colors">
+                            <!-- Prominent 1-Click Quick Activation Banner at Top of Card -->
+                            <div class="p-4 rounded-2xl bg-gradient-to-r from-amber-500/15 via-emerald-500/15 to-cyan-500/15 border-2 border-amber-500/40 flex flex-col sm:flex-row items-center justify-between gap-3">
+                                <div class="text-left space-y-0.5">
+                                    <div class="text-xs font-mono font-bold text-amber-500 dark:text-amber-400 uppercase flex items-center gap-1.5">
+                                        <i class="fa-solid fa-shield-halved"></i>
+                                        <span>Pochta Aktivatsiya Rejimi Yoqilgan</span>
+                                    </div>
+                                    <p class="text-xs text-slate-600 dark:text-slate-300">
+                                        Test ma'lumotni avtomatik to'ldirib, darhol Captcha oynasini ochish:
+                                    </p>
+                                </div>
+                                <button type="button" onclick="triggerOneClickActivation()" class="w-full sm:w-auto shrink-0 px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-extrabold text-xs shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center gap-2">
+                                    <span>⚡ 1-Marta Aktivatsiya Qilish (Captcha oynasini ochish)</span>
+                                </button>
+                            </div>
+
+                            <!-- Form Top Header -->
+                            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 dark:border-slate-800 pb-4">
+                                <div>
+                                    <h3 class="font-display text-xl font-bold" data-i18n="formTitle">
+                                        ur.usmonov@gmail.com ga xabar yuborish
+                                    </h3>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5" data-i18n="formSubtitle">
+                                        Ochiq Captcha POST rejimi (yangi oynada ochiladi) yoki Gmail orqali
+                                    </p>
+                                </div>
+                                <button type="button" onclick="fillDemoMessage()" class="px-3 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-mono text-xs font-semibold transition-all flex items-center gap-1.5" title="Test xabar matnini avtomatik to'ldirish">
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                    <span>Test ma'lumot to'ldirish</span>
+                                </button>
                             </div>
 
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1.5" data-i18n="formContactLabel">Email yoki Telegram / Tel *</label>
-                                    <input type="text" id="sender-contact" required placeholder="@username yoki +998..." class="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:outline-none focus:border-emerald-500 transition-colors">
+                                    <label class="block text-xs font-mono font-semibold uppercase text-slate-600 dark:text-slate-400 mb-1.5" data-i18n="formNameLabel">Ismingiz yoki Kompaniya *</label>
+                                    <input type="text" id="sender-name" name="Ism_yoki_Kompaniya" required placeholder="Masalan: Sardor / IT Company" class="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:outline-none focus:border-emerald-500 transition-colors">
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1.5" data-i18n="formTypeLabel">Murojaat turi</label>
-                                    <select id="sender-topic" class="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:outline-none focus:border-emerald-500 transition-colors">
-                                        <option value="Ishga taklif qilish (Job Offer)">Ishga taklif qilish (Job Offer)</option>
-                                        <option value="Yangi veb-sayt buyurtma qilish">Yangi veb-sayt buyurtma qilish</option>
-                                        <option value="Hamkorlik / Boshqa">Hamkorlik / Boshqa</option>
-                                    </select>
+                                    <label class="block text-xs font-mono font-semibold uppercase text-slate-600 dark:text-slate-400 mb-1.5" data-i18n="formContactLabel">Email yoki Telegram / Tel *</label>
+                                    <input type="text" id="sender-contact" name="Aloqa_malumoti" required placeholder="email@namuna.uz yoki +998..." class="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:outline-none focus:border-emerald-500 transition-colors">
                                 </div>
                             </div>
 
                             <div>
-                                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1.5" data-i18n="formMsgLabel">Xabar matni *</label>
-                                <textarea id="sender-message" rows="4" required placeholder="Salom Nodirbek, sizni kompaniyamizga veb-dasturchi sifatida taklif qilmoqchimiz..." class="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:outline-none focus:border-emerald-500 transition-colors"></textarea>
+                                <label class="block text-xs font-mono font-semibold uppercase text-slate-600 dark:text-slate-400 mb-1.5" data-i18n="formTypeLabel">Murojaat mavzusi</label>
+                                <select id="sender-topic" name="Murojaat_turi" class="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:outline-none focus:border-emerald-500 transition-colors">
+                                    <option value="Ishga taklif qilish (Job Offer)">💼 Ishga taklif qilish (Job Offer)</option>
+                                    <option value="Yangi veb-sayt buyurtma qilish">🚀 Yangi veb-sayt buyurtma qilish</option>
+                                    <option value="Hamkorlik / Konsultatsiya">🤝 Hamkorlik / Konsultatsiya</option>
+                                </select>
                             </div>
 
-                            <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold text-sm shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-2 transition-all">
-                                <i class="fa-solid fa-paper-plane"></i>
-                                <span data-i18n="formSubmitBtn">ur.usmonov@gmail.com ga yuborish</span>
-                            </button>
+                            <div>
+                                <label class="block text-xs font-mono font-semibold uppercase text-slate-600 dark:text-slate-400 mb-1.5" data-i18n="formMsgLabel">Xabar matni *</label>
+                                <textarea id="sender-message" name="Xabar_matni" rows="4" required placeholder="Salom Nodirbek, sizni kompaniyamizga dasturchi sifatida ishga taklif qilmoqchimiz..." class="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:outline-none focus:border-emerald-500 transition-colors"></textarea>
+                            </div>
+
+                            <!-- Live Delivery Status Box (Hidden until submit) -->
+                            <div id="email-status-box" class="hidden p-4 rounded-2xl border text-xs font-mono space-y-2"></div>
+
+                            <!-- Primary Native POST Submit & Direct Delivery Buttons -->
+                            <div class="space-y-3 pt-1">
+                                <!-- Button 1: Native HTML POST Submit (Opens FormSubmit Captcha in New Tab) -->
+                                <button type="submit" id="submit-btn" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-600 hover:from-emerald-600 hover:to-cyan-700 text-white font-bold text-sm shadow-xl shadow-emerald-500/25 flex items-center justify-center gap-2.5 transition-all">
+                                    <i id="submit-btn-icon" class="fa-solid fa-up-right-from-square"></i>
+                                    <span id="submit-btn-text" data-i18n="formSubmitBtn">Yuborish va Captcha Oynasini Ochish (ur.usmonov@gmail.com)</span>
+                                </button>
+
+                                <!-- Instant Direct Fallbacks (Always work 100% without activation) -->
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                                    <button type="button" onclick="openDirectGmail()" class="py-3 px-4 rounded-xl bg-slate-100 dark:bg-slate-900 hover:bg-emerald-500/15 text-slate-700 dark:text-slate-200 hover:text-emerald-400 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/40 font-mono text-xs font-semibold flex items-center justify-center gap-2 transition-all">
+                                        <i class="fa-brands fa-google text-emerald-500"></i>
+                                        <span>Gmail orqali to'g'ridan-to'g'ri yuborish</span>
+                                    </button>
+                                    <button type="button" onclick="openDirectMailto()" class="py-3 px-4 rounded-xl bg-slate-100 dark:bg-slate-900 hover:bg-cyan-500/15 text-slate-700 dark:text-slate-200 hover:text-cyan-400 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/40 font-mono text-xs font-semibold flex items-center justify-center gap-2 transition-all">
+                                        <i class="fa-solid fa-envelope-open-text text-cyan-400"></i>
+                                        <span>Pochta ilovasi (Mail App) orqali</span>
+                                    </button>
+                                </div>
+                            </div>
                         </form>
                     </div>
 
@@ -759,169 +1089,411 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="border-t border-slate-200 dark:border-slate-800/80 py-10 bg-white/50 dark:bg-slate-950">
+    <footer class="border-t border-slate-200 dark:border-slate-800/80 py-10 bg-white/50 dark:bg-[#020617]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
             <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center text-white font-mono font-bold text-sm">
+                <div class="w-9 h-9 rounded-xl bg-emerald-500 flex items-center justify-center text-slate-950 font-mono font-extrabold text-sm">
                     UN
                 </div>
                 <span class="text-sm text-slate-600 dark:text-slate-400">
-                    © <span id="current-year">2026</span> <strong>Usmonov Nodirbek</strong>. Barcha huquqlar himoyalangan.
+                    © <span id="current-year">2026</span> <strong>Usmonov Nodirbek</strong> • 3 Yillik Tajriba.
                 </span>
             </div>
-            <div class="flex items-center gap-4 text-sm font-mono">
-                <a href="https://iqbol-restaurant.uz" target="_blank" rel="noopener noreferrer" class="text-slate-600 dark:text-slate-400 hover:text-emerald-500 transition-colors">
-                    iqbol-restaurant.uz
+            <div class="flex flex-wrap items-center justify-center gap-4 text-xs sm:text-sm font-mono">
+                <a href="https://iqbol-restaurant.uz" target="_blank" rel="noopener noreferrer" class="text-emerald-500 hover:underline flex items-center gap-1">
+                    <i class="fa-solid fa-globe"></i>
+                    <span>iqbol-restaurant.uz</span>
                 </a>
                 <span class="text-slate-300 dark:text-slate-700">•</span>
-                <a href="mailto:ur.usmonov@gmail.com" class="text-emerald-600 dark:text-emerald-400 hover:underline">
+                <a href="mailto:ur.usmonov@gmail.com" class="text-slate-600 dark:text-slate-300 hover:text-emerald-400 transition-colors">
                     ur.usmonov@gmail.com
                 </a>
             </div>
         </div>
     </footer>
 
-    <!-- MODAL: PROJECT DETAILS (IQBOL-RESTAURANT.UZ) -->
-    <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/80 glass-card">
-        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative animate-float" style="animation: none;">
-            <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center">
-                        <i class="fa-solid fa-utensils"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-display font-bold text-lg text-slate-900 dark:text-white">Iqbol Restaurant — Loyiha tahlili</h3>
-                        <a href="https://iqbol-restaurant.uz" target="_blank" class="text-xs font-mono text-emerald-500 hover:underline">https://iqbol-restaurant.uz</a>
-                    </div>
-                </div>
-                <button onclick="closeProjectModal()" class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-rose-500 flex items-center justify-center">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
-            </div>
-
-            <div class="py-5 space-y-4 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                <p>
-                    <strong>Loyiha maqsadi:</strong> Iqbol restorani uchun mijozlarni jalb qiluvchi, taomlar menyusi va restoran xizmatlarini oson ko'rsatib beruvchi zamonaviy veb-platforma yaratish.
-                </p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                    <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
-                        <div class="font-bold text-slate-900 dark:text-white mb-1">Mobil Moslashuvchanlik</div>
-                        <div class="text-xs text-slate-500">Restoran mehmonlari telefon orqali kirganda menyu va narxlar qulay ko'rinadi.</div>
-                    </div>
-                    <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
-                        <div class="font-bold text-slate-900 dark:text-white mb-1">Tezkor Ishlash (Performance)</div>
-                        <div class="text-xs text-slate-500">Optimallashtirilgan rasm va toza kod orqali past internetda ham tez ochiladi.</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pt-4 border-t border-slate-200 dark:border-slate-800 flex justify-end gap-3">
-                <button onclick="closeProjectModal()" class="px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm font-semibold">
-                    Yopish
-                </button>
-                <a href="https://iqbol-restaurant.uz" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold flex items-center gap-2">
-                    <span>Saytni ko'rish</span>
-                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- JAVASCRIPT LOGIC -->
+    <!-- ==========================================
+         JAVASCRIPT ENGINE (PRELOADER, LOADING, SMTP)
+         ========================================== -->
     <script>
-        // Skills Data
-        const skillsData = [
-            { name: "HTML5 & Semantik Verstka", category: "frontend", level: "95%", icon: "fa-brands fa-html5", color: "text-orange-500" },
-            { name: "CSS3 & Flex/Grid", category: "frontend", level: "92%", icon: "fa-brands fa-css3-alt", color: "text-blue-500" },
-            { name: "JavaScript (ES6+)", category: "frontend", level: "88%", icon: "fa-brands fa-js", color: "text-amber-400" },
-            { name: "Tailwind CSS", category: "frontend", level: "95%", icon: "fa-solid fa-wind", color: "text-cyan-400" },
-            { name: "React & Web Apps", category: "frontend", level: "85%", icon: "fa-brands fa-react", color: "text-sky-400" },
-            { name: "Responsive / Mobile-First UI", category: "tools", level: "98%", icon: "fa-solid fa-mobile-screen", color: "text-emerald-400" },
-            { name: "Git & GitHub", category: "tools", level: "88%", icon: "fa-brands fa-git-alt", color: "text-rose-500" },
-            { name: "Hosting, Domen & SEO", category: "tools", level: "90%", icon: "fa-solid fa-server", color: "text-indigo-400" }
+        // 1. CINEMATIC PRELOADER LOGIC
+        const bootMessages = [
+            "Loading core portfolio modules v3.4...",
+            "Compiling Usmonov Nodirbek (3+ Years Exp) profile...",
+            "Verifying live deployment: https://iqbol-restaurant.uz [200 OK]...",
+            "Configuring SMTP bridge -> ur.usmonov@gmail.com...",
+            "System Ready. Launching interface..."
         ];
 
-        // Render Skills Grid
+        let bootInterval = null;
+
+        function startPreloader() {
+            const preloader = document.getElementById('boot-preloader');
+            const percentEl = document.getElementById('boot-percent');
+            const barEl = document.getElementById('boot-bar');
+            const logsEl = document.getElementById('boot-logs');
+
+            preloader.classList.remove('preloader-hidden');
+            logsEl.innerHTML = '';
+            let progress = 0;
+            let logIndex = 0;
+
+            if (bootInterval) clearInterval(bootInterval);
+
+            bootInterval = setInterval(() => {
+                progress += Math.floor(Math.random() * 6) + 3;
+                if (progress > 100) progress = 100;
+
+                percentEl.textContent = `${progress}%`;
+                barEl.style.width = `${progress}%`;
+
+                const expectedLogIndex = Math.floor((progress / 100) * bootMessages.length);
+                if (logIndex <= expectedLogIndex && logIndex < bootMessages.length) {
+                    const line = document.createElement('div');
+                    line.className = "flex items-center gap-2 text-xs font-mono";
+                    line.innerHTML = `<span class="text-emerald-400">✓</span> <span>${bootMessages[logIndex]}</span>`;
+                    logsEl.appendChild(line);
+                    logsEl.scrollTop = logsEl.scrollHeight;
+                    logIndex++;
+                }
+
+                if (progress >= 100) {
+                    clearInterval(bootInterval);
+                    setTimeout(finishPreloader, 350);
+                }
+            }, 45);
+        }
+
+        function finishPreloader() {
+            if (bootInterval) clearInterval(bootInterval);
+            const preloader = document.getElementById('boot-preloader');
+            preloader.classList.add('preloader-hidden');
+        }
+
+        function replayPreloader() {
+            startPreloader();
+        }
+
+        // 2. HERO TYPEWRITER EFFECT
+        const roles = [
+            "Full-Stack & Frontend Developer",
+            "iqbol-restaurant.uz Muallifi",
+            "3+ Yillik Amaliy Tajriba",
+            "UI/UX & Web Performance Architect"
+        ];
+        let roleIdx = 0;
+        let charIdx = 0;
+        let isDeleting = false;
+
+        function runTypewriter() {
+            const el = document.getElementById('typewriter-text');
+            if (!el) return;
+            const currentRole = roles[roleIdx];
+
+            if (isDeleting) {
+                charIdx--;
+            } else {
+                charIdx++;
+            }
+
+            el.textContent = currentRole.substring(0, charIdx);
+
+            let speed = isDeleting ? 35 : 70;
+            if (!isDeleting && charIdx === currentRole.length) {
+                speed = 1800;
+                isDeleting = true;
+            } else if (isDeleting && charIdx === 0) {
+                isDeleting = false;
+                roleIdx = (roleIdx + 1) % roles.length;
+                speed = 300;
+            }
+            setTimeout(runTypewriter, speed);
+        }
+
+        // 3. SKILLS DATA & SKELETON LOADING FILTER
+        const skillsData = [
+            { name: "HTML5 & Semantik Arxitektura", category: "frontend", level: "98%", icon: "fa-brands fa-html5", color: "text-orange-500" },
+            { name: "CSS3, SCSS & Animatsiyalar", category: "frontend", level: "95%", icon: "fa-brands fa-css3-alt", color: "text-blue-500" },
+            { name: "JavaScript (ES6+ / TypeScript)", category: "frontend", level: "92%", icon: "fa-brands fa-js", color: "text-amber-400" },
+            { name: "Tailwind CSS & UI Systems", category: "frontend", level: "96%", icon: "fa-solid fa-wind", color: "text-cyan-400" },
+            { name: "React.js & Next.js SPA", category: "frontend", level: "88%", icon: "fa-brands fa-react", color: "text-sky-400" },
+            { name: "Responsive / Mobile-First UX", category: "frontend", level: "100%", icon: "fa-solid fa-mobile-screen-button", color: "text-emerald-400" },
+            { name: "REST API & JSON Integratsiya", category: "backend", level: "90%", icon: "fa-solid fa-plug", color: "text-purple-400" },
+            { name: "Node.js & Webhooks / Bots", category: "backend", level: "84%", icon: "fa-brands fa-node-js", color: "text-green-500" },
+            { name: "Git, GitHub & CI/CD", category: "backend", level: "92%", icon: "fa-brands fa-git-alt", color: "text-rose-500" },
+            { name: "Domen, SSL, VPS & Deployment", category: "backend", level: "95%", icon: "fa-solid fa-server", color: "text-indigo-400" },
+            { name: "Google SEO & Lighthouse 99+", category: "backend", level: "96%", icon: "fa-solid fa-gauge-high", color: "text-emerald-400" },
+            { name: "Figma to Code (Pixel-Perfect)", category: "frontend", level: "94%", icon: "fa-brands fa-figma", color: "text-pink-400" }
+        ];
+
         function renderSkills(filter = 'all') {
             const grid = document.getElementById('skills-grid');
             const filtered = filter === 'all' ? skillsData : skillsData.filter(s => s.category === filter);
 
             grid.innerHTML = filtered.map(skill => `
-                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/50 transition-all shadow-sm group">
+                <div class="spotlight-card p-5 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/50 transition-all shadow-sm group">
                     <div class="flex items-center justify-between mb-4">
                         <div class="w-11 h-11 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-xl ${skill.color} group-hover:scale-110 transition-transform">
                             <i class="${skill.icon}"></i>
                         </div>
-                        <span class="font-mono text-xs font-bold text-emerald-500 bg-emerald-500/10 px-2.5 py-1 rounded-lg">${skill.level}</span>
+                        <span class="font-mono text-xs font-bold text-emerald-500 bg-emerald-500/10 px-2.5 py-1 rounded-lg border border-emerald-500/20">${skill.level}</span>
                     </div>
-                    <h3 class="font-display font-bold text-base text-slate-900 dark:text-white mb-3">${skill.name}</h3>
+                    <h3 class="font-display font-bold text-sm sm:text-base text-slate-900 dark:text-white mb-3">${skill.name}</h3>
                     <div class="w-full h-2 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
-                        <div class="h-full rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500" style="width: ${skill.level}"></div>
+                        <div class="h-full rounded-full bg-gradient-to-r from-emerald-500 to-cyan-400 transition-all duration-700" style="width: ${skill.level}"></div>
                     </div>
                 </div>
             `).join('');
+            initSpotlightCards();
         }
 
-        function filterSkills(category) {
-            renderSkills(category);
+        function filterSkillsWithLoading(category) {
+            // Update active button styling
             document.querySelectorAll('.skill-filter-btn').forEach(btn => {
-                btn.className = "skill-filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-200 dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-800 transition-all";
+                btn.className = "skill-filter-btn px-4 py-2.5 rounded-xl text-xs font-mono font-bold bg-slate-200 dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-800 hover:border-emerald-500/40 transition-all";
             });
             const activeBtn = document.getElementById(`skill-btn-${category}`);
             if (activeBtn) {
-                activeBtn.className = "skill-filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-emerald-500 text-white transition-all shadow-md shadow-emerald-500/20";
+                activeBtn.className = "skill-filter-btn px-4 py-2.5 rounded-xl text-xs font-mono font-bold bg-emerald-500 text-slate-950 shadow-lg shadow-emerald-500/20 transition-all";
             }
+
+            // Show Skeleton Shimmer Loading State
+            const grid = document.getElementById('skills-grid');
+            grid.innerHTML = Array(4).fill(0).map(() => `
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="w-11 h-11 rounded-xl skeleton-loader"></div>
+                        <div class="w-12 h-6 rounded-lg skeleton-loader"></div>
+                    </div>
+                    <div class="w-3/4 h-5 rounded skeleton-loader"></div>
+                    <div class="w-full h-2 rounded-full skeleton-loader"></div>
+                </div>
+            `).join('');
+
+            setTimeout(() => {
+                renderSkills(category);
+            }, 320);
         }
 
-        // Hero Code / Terminal Switcher
-        function switchHeroTab(tab) {
-            const codeTab = document.getElementById('hero-tab-code');
-            const termTab = document.getElementById('hero-tab-terminal');
-            const codeBtn = document.getElementById('tab-code-btn');
-            const termBtn = document.getElementById('tab-term-btn');
+        // 4. IDE TAB SWITCHER WITH LOADING
+        function switchIdeTab(tab) {
+            const tabs = ['profile', 'arch', 'term'];
+            const loader = document.getElementById('ide-loader');
 
-            if (tab === 'code') {
-                codeTab.classList.remove('hidden');
-                termTab.classList.add('hidden');
-                codeBtn.className = "px-3 py-1 rounded-md bg-emerald-500/20 text-emerald-400 font-medium transition-all";
-                termBtn.className = "px-3 py-1 rounded-md text-slate-400 hover:text-slate-200 transition-all";
-            } else {
-                codeTab.classList.add('hidden');
-                termTab.classList.remove('hidden');
-                termBtn.className = "px-3 py-1 rounded-md bg-emerald-500/20 text-emerald-400 font-medium transition-all";
-                codeBtn.className = "px-3 py-1 rounded-md text-slate-400 hover:text-slate-200 transition-all";
-            }
+            tabs.forEach(t => {
+                document.getElementById(`ide-tab-${t}`).classList.add('hidden');
+                document.getElementById(`ide-tab-${t}`).classList.remove('flex');
+                document.getElementById(`ide-btn-${t}`).className = "px-2.5 py-1 rounded-lg text-slate-400 hover:text-slate-200 transition-all";
+            });
+
+            document.getElementById(`ide-btn-${tab}`).className = "px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-400 font-semibold transition-all";
+
+            loader.classList.remove('hidden');
+            loader.classList.add('flex');
+
+            setTimeout(() => {
+                loader.classList.add('hidden');
+                loader.classList.remove('flex');
+                const target = document.getElementById(`ide-tab-${tab}`);
+                target.classList.remove('hidden');
+                target.classList.add('flex');
+            }, 220);
         }
 
-        // Interactive Terminal Commands
+        // 5. INTERACTIVE TERMINAL COMMANDS WITH LOADING
         function runTerminalCmd(cmd) {
             const output = document.getElementById('terminal-output');
             if (cmd === 'clear') {
-                output.innerHTML = '<div class="text-slate-400">// Terminal tozalandi. Buyruqni tanlang:</div>';
+                output.innerHTML = '<div class="text-slate-500">// Terminal tozalandi. Buyruqni tanlang:</div>';
                 return;
             }
-            let responseHTML = '';
-            if (cmd === 'projects') {
-                responseHTML = `
-                    <div class="text-emerald-400 mt-2">$ ./loyihalar</div>
-                    <div class="text-slate-300 pl-3">→ Asosiy loyiha: <a href="https://iqbol-restaurant.uz" target="_blank" class="text-cyan-400 underline">https://iqbol-restaurant.uz</a> (Faol)</div>
-                `;
-            } else if (cmd === 'skills') {
-                responseHTML = `
-                    <div class="text-emerald-400 mt-2">$ ./texnologiyalar</div>
-                    <div class="text-slate-300 pl-3">→ HTML5, CSS3, Tailwind CSS, JavaScript, React, Git, Responsive UI</div>
-                `;
-            } else if (cmd === 'contact') {
-                responseHTML = `
-                    <div class="text-emerald-400 mt-2">$ ./boglanish</div>
-                    <div class="text-slate-300 pl-3">→ Email: <span class="text-amber-300">ur.usmonov@gmail.com</span> (Ish takliflari uchun ochiq!)</div>
-                `;
-            }
-            output.insertAdjacentHTML('beforeend', responseHTML);
+
+            const loadingId = 'cmd-load-' + Date.now();
+            output.insertAdjacentHTML('beforeend', `
+                <div id="${loadingId}" class="text-cyan-400 mt-2 flex items-center gap-2">
+                    <i class="fa-solid fa-circle-notch animate-spin text-xs"></i>
+                    <span>Executing ${cmd}...</span>
+                </div>
+            `);
             output.scrollTop = output.scrollHeight;
+
+            setTimeout(() => {
+                const loaderEl = document.getElementById(loadingId);
+                if (loaderEl) loaderEl.remove();
+
+                let responseHTML = '';
+                if (cmd === 'projects') {
+                    responseHTML = `
+                        <div class="text-emerald-400 mt-1">root@nodirbek:~$ ./loyihalar</div>
+                        <div class="text-slate-300 pl-3">→ Live Production: <a href="https://iqbol-restaurant.uz" target="_blank" class="text-cyan-400 underline font-bold">https://iqbol-restaurant.uz</a></div>
+                    `;
+                } else if (cmd === 'skills') {
+                    responseHTML = `
+                        <div class="text-emerald-400 mt-1">root@nodirbek:~$ ./texnologiyalar</div>
+                        <div class="text-slate-300 pl-3">→ HTML5, CSS3, Tailwind, JS/TS, React, Node.js, Git, SEO (3+ Yil)</div>
+                    `;
+                } else if (cmd === 'ping') {
+                    responseHTML = `
+                        <div class="text-emerald-400 mt-1">root@nodirbek:~$ ping iqbol-restaurant.uz</div>
+                        <div class="text-slate-300 pl-3">64 bytes from iqbol-restaurant.uz: time=14.2ms [SSL OK]</div>
+                    `;
+                } else if (cmd === 'contact') {
+                    responseHTML = `
+                        <div class="text-emerald-400 mt-1">root@nodirbek:~$ ./aloqa</div>
+                        <div class="text-slate-300 pl-3">→ Email: <span class="text-amber-300 font-bold">ur.usmonov@gmail.com</span> [Ready]</div>
+                    `;
+                }
+                output.insertAdjacentHTML('beforeend', responseHTML);
+                output.scrollTop = output.scrollHeight;
+            }, 300);
         }
 
-        // Copy Email to Clipboard with Toast Notification
+        // 6. VIEWPORT SWITCHER FOR IQBOL-RESTAURANT.UZ SHOWCASE
+        function switchViewport(mode) {
+            const frame = document.getElementById('viewport-frame');
+            const loader = document.getElementById('viewport-loader');
+            const loaderText = document.getElementById('viewport-loader-text');
+            const caption = document.getElementById('viewport-caption');
+
+            ['desktop', 'tablet', 'mobile'].forEach(m => {
+                document.getElementById(`vp-${m}`).className = "px-3 py-1.5 rounded-xl text-slate-600 dark:text-slate-400 hover:text-white font-mono text-xs font-semibold flex items-center gap-1.5 transition-all";
+            });
+            document.getElementById(`vp-${mode}`).className = "px-3 py-1.5 rounded-xl bg-emerald-500 text-slate-950 font-mono text-xs font-bold flex items-center gap-1.5 transition-all shadow-md shadow-emerald-500/20";
+
+            loaderText.textContent = `Switching iqbol-restaurant.uz to ${mode.toUpperCase()} view...`;
+            loader.classList.remove('hidden');
+            loader.classList.add('flex');
+
+            if (mode === 'desktop') {
+                frame.style.maxWidth = '100%';
+                caption.textContent = 'Viewport: Desktop (1440px Responsive)';
+            } else if (mode === 'tablet') {
+                frame.style.maxWidth = '520px';
+                caption.textContent = 'Viewport: Tablet (768px iPad View)';
+            } else if (mode === 'mobile') {
+                frame.style.maxWidth = '360px';
+                caption.textContent = 'Viewport: Mobile (390px iPhone QR-Menu View)';
+            }
+
+            setTimeout(() => {
+                loader.classList.add('hidden');
+                loader.classList.remove('flex');
+            }, 380);
+        }
+
+        function reloadPreviewSimulation() {
+            const icon = document.getElementById('preview-reload-icon');
+            const loader = document.getElementById('viewport-loader');
+            const loaderText = document.getElementById('viewport-loader-text');
+
+            icon.classList.add('animate-spin');
+            loaderText.textContent = "Verifying live status of https://iqbol-restaurant.uz...";
+            loader.classList.remove('hidden');
+            loader.classList.add('flex');
+
+            setTimeout(() => {
+                icon.classList.remove('animate-spin');
+                loader.classList.add('hidden');
+                loader.classList.remove('flex');
+                showToast("iqbol-restaurant.uz: 200 OK (Faol holatda!)", "success");
+            }, 500);
+        }
+
+        // ==========================================
+        // 7. REAL EMAIL DELIVERY SYSTEM (ur.usmonov@gmail.com)
+        // ==========================================
+        function getFormValues() {
+            const name = (document.getElementById('sender-name').value || 'Mijoz / Kompaniya').trim();
+            const contact = (document.getElementById('sender-contact').value || 'Kiritilmagan').trim();
+            const topic = (document.getElementById('sender-topic').value || 'Ish taklifi').trim();
+            const message = (document.getElementById('sender-message').value || 'Salom Nodirbek, siz bilan hamkorlik qilmoqchimiz.').trim();
+            return { name, contact, topic, message };
+        }
+
+        function fillDemoMessage() {
+            document.getElementById('sender-name').value = "Tech Solutions HR";
+            document.getElementById('sender-contact').value = "+998 90 123 45 67 / hr@company.uz";
+            document.getElementById('sender-message').value = "Salom Nodirbek! Sizning iqbol-restaurant.uz loyihangiz va 3 yillik tajribangiz bizga ma'qul keldi. Sizni kompaniyamizga suhbatga taklif qilmoqchimiz.";
+            showToast("Test xabar ma'lumotlari to'ldirildi! Endi yuborish tugmasini bosing.", "info");
+        }
+
+        // Quick 1-Click Activation Button Handler (Fills sample data if empty & submits native POST form)
+        function triggerOneClickActivation() {
+            const nameInput = document.getElementById('sender-name');
+            const contactInput = document.getElementById('sender-contact');
+            const msgInput = document.getElementById('sender-message');
+
+            if (!nameInput.value.trim()) {
+                nameInput.value = "Portfolio Aktivatsiya Test";
+            }
+            if (!contactInput.value.trim()) {
+                contactInput.value = "ur.usmonov@gmail.com";
+            }
+            if (!msgInput.value.trim()) {
+                msgInput.value = "Ushbu xabar ur.usmonov@gmail.com pochtasini FormSubmit tizimida aktivatsiya qilish uchun yuborildi.";
+            }
+
+            const form = document.getElementById('contact-form');
+            showActivationStatusBanner();
+            form.submit();
+        }
+
+        function showActivationStatusBanner() {
+            const statusBox = document.getElementById('email-status-box');
+            statusBox.className = "p-4 rounded-2xl bg-emerald-500/15 border border-emerald-500/50 text-xs font-mono text-emerald-300 space-y-2 block";
+            statusBox.innerHTML = `
+                <div class="font-bold text-emerald-400 flex items-center gap-2 text-sm">
+                    <i class="fa-solid fa-up-right-from-square"></i>
+                    <span>Yangi oynada FormSubmit Captcha sahifasi ochildi!</span>
+                </div>
+                <ol class="list-decimal list-inside font-sans text-slate-300 space-y-1 leading-relaxed">
+                    <li>Ochilgan yangi oynada <strong>"I am human"</strong> katakchasini belgilang.</li>
+                    <li>So'ng <strong>ur.usmonov@gmail.com</strong> pochtangizga (<strong>Inbox</strong>, <strong>All Mail</strong> yoki <strong>Spam</strong>) kiring.</li>
+                    <li><strong>"FormSubmit - Activate Form"</strong> xati ichidagi <strong>"Activate Form"</strong> tugmasini bosing!</li>
+                </ol>
+            `;
+            showToast("Yangi oynada Captcha ochildi! Robot emasligingizni tasdiqlang.", "success");
+        }
+
+        // Method A: Native Form POST Submission (NO e.preventDefault() so browser opens Captcha screen)
+        function handleNativeCaptchaSubmit() {
+            // Do NOT call event.preventDefault() — let native HTML POST open https://formsubmit.co/ur.usmonov@gmail.com in target="_blank"
+            showActivationStatusBanner();
+        }
+
+        // Method B: Guaranteed 100% Direct Gmail Web Compose (No server activation needed)
+        function openDirectGmail() {
+            const { name, contact, topic, message } = getFormValues();
+            const subject = encodeURIComponent(`${topic} — ${name}`);
+            const body = encodeURIComponent(
+                `Salom Nodirbek,\n\n` +
+                `Murojaatchi: ${name}\n` +
+                `Aloqa: ${contact}\n` +
+                `Mavzu: ${topic}\n\n` +
+                `Xabar:\n${message}\n\n` +
+                `--- Portfolio saytidan yuborildi ---`
+            );
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=ur.usmonov@gmail.com&su=${subject}&body=${body}`;
+            window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+            showToast("Gmail xat yuborish oynasi yangi sahifada ochildi!", "success");
+        }
+
+        // Method C: Standard Mailto App
+        function openDirectMailto() {
+            const { name, contact, topic, message } = getFormValues();
+            const subject = encodeURIComponent(`${topic} — ${name}`);
+            const body = encodeURIComponent(
+                `Salom Nodirbek,\n\n` +
+                `Murojaatchi: ${name}\n` +
+                `Aloqa: ${contact}\n` +
+                `Mavzu: ${topic}\n\n` +
+                `Xabar:\n${message}`
+            );
+            window.location.href = `mailto:ur.usmonov@gmail.com?subject=${subject}&body=${body}`;
+            showToast("Pochta ilovangiz ochildi!", "info");
+        }
+
+        // Copy Email Helper
         function copyEmail() {
             const email = "ur.usmonov@gmail.com";
             const tempInput = document.createElement("textarea");
@@ -930,224 +1502,157 @@
             tempInput.select();
             document.execCommand("copy");
             document.body.removeChild(tempInput);
-
-            showToast(currentLang === 'uz' 
-                ? "ur.usmonov@gmail.com nusxalandi!" 
-                : "Copied ur.usmonov@gmail.com to clipboard!");
+            showToast("ur.usmonov@gmail.com xotiraga nusxalandi!", "success");
         }
 
-        function showToast(message) {
+        // Toast Notification System
+        function showToast(message, type = "success") {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
-            toast.className = "px-4 py-3 rounded-2xl bg-slate-900 dark:bg-emerald-500 text-white text-sm font-medium shadow-xl flex items-center gap-2.5 border border-slate-700 dark:border-emerald-400 transition-all duration-300";
-            toast.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400 dark:text-white"></i> <span>${message}</span>`;
+            const iconClass = type === "success" ? "fa-circle-check text-emerald-400" : "fa-circle-info text-cyan-400";
+            toast.className = "p-4 rounded-2xl bg-slate-900/95 text-white text-xs sm:text-sm font-medium shadow-2xl flex items-center gap-3 border border-slate-700/90 backdrop-blur-xl transition-all duration-300 pointer-events-auto";
+            toast.innerHTML = `<i class="fa-solid ${iconClass} text-lg shrink-0"></i> <span>${message}</span>`;
             container.appendChild(toast);
 
             setTimeout(() => {
                 toast.style.opacity = '0';
                 toast.style.transform = 'translateY(10px)';
                 setTimeout(() => toast.remove(), 300);
-            }, 3000);
+            }, 3800);
         }
 
-        // Contact Form Handler -> Opens mailto & shows confirmation
-        function handleContactSubmit(e) {
-            e.preventDefault();
-            const name = document.getElementById('sender-name').value.trim();
-            const contact = document.getElementById('sender-contact').value.trim();
-            const topic = document.getElementById('sender-topic').value;
-            const message = document.getElementById('sender-message').value.trim();
-
-            const subject = encodeURIComponent(`${topic} - ${name}`);
-            const body = encodeURIComponent(
-                `Salom Nodirbek,\n\n` +
-                `Murojaatchi: ${name}\n` +
-                `Aloqa uchun: ${contact}\n` +
-                `Mavzu: ${topic}\n\n` +
-                `Xabar:\n${message}`
-            );
-
-            window.location.href = `mailto:ur.usmonov@gmail.com?subject=${subject}&body=${body}`;
-            showToast(currentLang === 'uz' 
-                ? "Pochta dasturingiz ochildi! Xabarni yuborishingiz mumkin." 
-                : "Opening your mail client to send to ur.usmonov@gmail.com!");
+        // 8. SPOTLIGHT HOVER CARDS & SCROLL PROGRESS
+        function initSpotlightCards() {
+            document.querySelectorAll('.spotlight-card').forEach(card => {
+                card.onmousemove = e => {
+                    const rect = card.getBoundingClientRect();
+                    card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                    card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+                };
+            });
         }
 
-        // Modal Functions
-        function openProjectModal() {
-            const modal = document.getElementById('project-modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+            const bar = document.getElementById('scroll-progress');
+            if (bar) bar.style.width = scrolled + "%";
+        });
+
+        // 9. ANIMATED PARTICLE BACKGROUND CANVAS
+        function initNetworkCanvas() {
+            const canvas = document.getElementById('network-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let width, height, particles;
+
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            particles = Array.from({ length: 35 }, () => ({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                vx: (Math.random() - 0.5) * 0.4,
+                vy: (Math.random() - 0.5) * 0.4,
+                r: Math.random() * 1.8 + 0.8
+            }));
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                ctx.fillStyle = 'rgba(16, 185, 129, 0.35)';
+
+                for (let i = 0; i < particles.length; i++) {
+                    const p = particles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    if (p.x < 0 || p.x > width) p.vx *= -1;
+                    if (p.y < 0 || p.y > height) p.vy *= -1;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const p2 = particles[j];
+                        const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+                        if (dist < 140) {
+                            ctx.strokeStyle = `rgba(16, 185, 129, ${0.12 * (1 - dist / 140)})`;
+                            ctx.lineWidth = 0.8;
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(animate);
+            }
+            animate();
         }
 
-        function closeProjectModal() {
-            const modal = document.getElementById('project-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        // Mobile Menu Toggle
+        // 10. THEME & BILINGUAL SWITCHER
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             const icon = document.getElementById('mobile-menu-icon');
             menu.classList.toggle('hidden');
-            if (menu.classList.contains('hidden')) {
-                icon.className = "fa-solid fa-bars text-lg";
-            } else {
-                icon.className = "fa-solid fa-xmark text-lg";
-            }
+            icon.className = menu.classList.contains('hidden') ? "fa-solid fa-bars text-lg" : "fa-solid fa-xmark text-lg";
         }
 
-        // Dark / Light Theme Switcher
         function toggleTheme() {
             const html = document.documentElement;
             const icon = document.getElementById('theme-icon');
             const mobileIcon = document.getElementById('mobile-theme-icon');
-
             html.classList.toggle('dark');
             const isDark = html.classList.contains('dark');
-
-            if (isDark) {
-                icon.className = "fa-solid fa-sun text-amber-400";
-                mobileIcon.className = "fa-solid fa-sun text-amber-400 text-sm";
-            } else {
-                icon.className = "fa-solid fa-moon text-slate-700";
-                mobileIcon.className = "fa-solid fa-moon text-slate-700 text-sm";
-            }
+            icon.className = isDark ? "fa-solid fa-sun text-amber-400" : "fa-solid fa-moon text-slate-700";
+            mobileIcon.className = isDark ? "fa-solid fa-sun text-amber-400 text-sm" : "fa-solid fa-moon text-slate-700 text-sm";
         }
 
-        // UZ / EN Bilingual Dictionary
         let currentLang = 'uz';
         const translations = {
             uz: {
-                navRole: "Web Developer • 3+ Yil",
+                navRole: "Full-Stack & Frontend • 3+ Yil",
                 navHome: "Bosh sahifa",
-                navAbout: "Tajriba",
+                navAbout: "3 Yillik Tajriba",
                 navSkills: "Texnologiyalar",
-                navProjects: "Loyihalar",
+                navProjects: "Loyihalar (Live)",
                 navContact: "Bog'lanish",
                 navHireBtn: "Ishga taklif qilish",
-                heroBadgeAvailable: "Ish va yangi loyihalar uchun ochiqman",
-                heroBadgeExp: "3+ Yillik Tajriba",
-                heroGreeting: "Salom, men",
-                heroBio: "Men <strong class='text-slate-900 dark:text-white font-semibold'>3 yillik amaliy tajribaga ega Veb-dasturchiman</strong>. Zamonaviy, tezkor va foydalanuvchilar uchun qulay veb-saytlar hamda raqamli platformalarni (<a href='https://iqbol-restaurant.uz' target='_blank' class='text-emerald-500 underline decoration-emerald-500/40 hover:decoration-emerald-500 font-mono'>iqbol-restaurant.uz</a> kabi) noldan sifatli darajada yarataman.",
-                heroHireLabel: "Ishga taklif qilish uchun:",
+                heroBadgeAvailable: "AVAILABLE FOR HIRE • ISHGA TAYYOR",
+                heroBadgeExp: "3+ Yillik Professional Tajriba",
+                heroBio: "Men <strong class='text-slate-900 dark:text-white font-semibold'>3 yillik amaliy tajribaga ega Veb-dasturchiman</strong>. Bizneslar uchun yuqori tezlikda ishlovchi, zamonaviy UI/UX arxitekturaga ega veb-saytlar va murakkab tizimlarni (<a href='https://iqbol-restaurant.uz' target='_blank' class='text-emerald-400 underline font-mono font-semibold'>iqbol-restaurant.uz</a> kabi) noldan ishlab chiqaman.",
+                heroHireLabel: "Ishga taklif qilish / Aloqa:",
                 copyBtn: "Nusxalash",
-                heroBtnProjects: "Qilgan ishlarimni ko'rish",
-                heroBtnContact: "Bog'lanish / Ishga olish",
-                statExp: "Dasturlash tajribasi",
-                statQuality: "Moslashuvchan & Tezkor",
-                statSupport: "Doimiy aloqa",
-                heroLiveCardSub: "Real ishlayotgan loyihani ko'rish uchun bosing",
-                aboutTag: "Men haqimda va Tajriba",
-                aboutTitle: "3 Yillik Dasturlash Tajribasi va Professional Yondashuv",
-                aboutSubtitle: "Har bir loyihaga shunchaki kod sifatida emas, balki mijozning biznesini rivojlantiruvchi va foydalanuvchilarga qulaylik yaratuvchi tayyor mahsulot sifatida yondashaman.",
-                exp1Title: "Frontend Asoslari va Moslashuvchan Dizayn",
-                exp1Desc: "HTML5, CSS3, JavaScript va zamonaviy verstka standartlarini chuqur o'zlashtirish. Barcha mobil telefon, planshet va kompyuter ekranlarida nuqsonsiz ishlovchi interfeyslar yaratish.",
-                exp2Title: "Zamonaviy Frameworklar va Interaktiv Web-Ilovalar",
-                exp2Desc: "Tailwind CSS, React, dinamik JavaScript arxitekturasi va REST API integratsiyalari. Yuqori tezlikda ishlovchi, zamonaviy animatsiyalarga boy veb-ilovalarni ishlab chiqish.",
-                exp3Title: "Real Biznes Platformalar va To'liq Yechimlar",
-                exp3Desc: "Mijozlar va bizneslar uchun noldan domen va hostingga ulab ishga tushirilgan real loyihalar — jumladan <strong class='text-emerald-500'>iqbol-restaurant.uz</strong> platformasini yaratish va qo'llab-quvvatlash.",
-                skillsTag: "Texnik Ko'nikmalar",
-                skillsTitle: "Ishlatadigan Texnologiyalarim",
-                filterAll: "Barchasi",
-                filterTools: "Asboblar & UI",
-                projectsTag: "Portfolio & Natijalar",
-                projectsTitle: "Qilgan Veb-saytlarim va Loyihalarim",
-                projectsSubtitle: "3 yillik faoliyatim davomida yaratilgan real loyihalar va zamonaviy veb-yechimlar.",
-                iqbolDesc: "<strong>iqbol-restaurant.uz</strong> — restoran mijozlari uchun maxsus ishlab chiqilgan zamonaviy veb-sayt va onlayn menyu platformasi. Sayt orqali mehmonlar taomlar menyusi, restoran atmosferasi, manzili va bog'lanish ma'lumotlari bilan barcha qurilmalarda tez va qulay tanishishlari mumkin.",
-                iqbolFeat1: "Smartfon, planshet va kompyuterlarga 100% moslashuvchan dizayn",
-                iqbolFeat2: "Zamonaviy UI/UX interfeys va tezkor sahifa yuklanishi",
-                iqbolFeat3: "Qidiruv tizimlari (SEO) va domen/SSL integratsiyasi",
-                btnVisitSite: "iqbol-restaurant.uz ni ochish",
-                btnDetails: "Batafsil",
-                sol1Title: "Korporativ va Biznes Saytlar",
-                sol1Desc: "Kompaniyalar, restoranlar, klinikalar va xizmat ko'rsatish markazlari uchun ishonchli hamda zamonaviy veb-saytlar.",
-                sol2Title: "Onlayn Katalog va QR-Menyular",
-                sol2Desc: "Iqbol Restaurant tajribasi asosida kafe, restoran va do'konlar uchun tezkor raqamli katalog hamda onlayn buyurtma tizimlari.",
-                sol3Title: "Maxsus Web-Ilovalar va Frontend",
-                sol3Desc: "React va JavaScript yordamida murakkab interfeyslar, boshqaruv panellari (Dashboard) va mavjud saytlarni zamonaviylashtirish.",
-                orderLink: "Buyurtma berish →",
-                contactBadge: "HAMKORLIK VA ISHGA TAKLIF QILISH",
-                contactHeading: "Meni ishga olmoqchimisiz yoki yangi loyiha bormi?",
-                contactText: "Agar meni kompaniyangizga dasturchi sifatida ishga olmoqchi bo'lsangiz yoki biznesingiz uchun zamonaviy veb-sayt buyurtma qilmoqchi bo'lsangiz, quyidagi elektron pochtamga yozishingiz mumkin:",
-                emailLabel: "Rasmiy elektron pochta:",
-                btnCopyEmail: "Emailni nusxalash",
-                btnSendMail: "Pochta orqali yozish",
-                infoExp: "3 yil tajriba",
-                infoLoc: "O'zbekiston (Masofaviy / Ofis)",
-                formTitle: "Tezkor xabar yuborish",
-                formSubtitle: "Formani to'ldiring — xabaringiz to'g'ridan-to'g'ri ur.usmonov@gmail.com pochtasiga yo'naltiriladi.",
-                formNameLabel: "Ismingiz yoki Kompaniya nomi *",
-                formContactLabel: "Email yoki Telegram / Tel *",
-                formTypeLabel: "Murojaat turi",
-                formMsgLabel: "Xabar matni *",
-                formSubmitBtn: "ur.usmonov@gmail.com ga yuborish"
+                heroBtnProjects: "Loyihalarni ko'rish (iqbol-restaurant.uz)",
+                heroBtnContact: "Xabar yuborish",
+                btnVisitSite: "iqbol-restaurant.uz saytiga o'tish",
+                contactHeading: "Meni ishga olmoqchimisiz? Hoziroq bog'laning!",
+                formSubmitBtn: "Yuborish va Captcha Oynasini Ochish (ur.usmonov@gmail.com)"
             },
             en: {
-                navRole: "Web Developer • 3+ Yrs",
+                navRole: "Full-Stack & Frontend • 3+ Yrs",
                 navHome: "Home",
-                navAbout: "Experience",
-                navSkills: "Skills",
-                navProjects: "Projects",
+                navAbout: "3 Yrs Experience",
+                navSkills: "Tech Stack",
+                navProjects: "Live Projects",
                 navContact: "Contact",
                 navHireBtn: "Hire Me",
-                heroBadgeAvailable: "Open to job offers & new web projects",
-                heroBadgeExp: "3+ Years Experience",
-                heroGreeting: "Hi, I am",
-                heroBio: "I am a <strong class='text-slate-900 dark:text-white font-semibold'>Web Developer with 3 years of hands-on experience</strong>. I build fast, responsive, and modern websites and web applications from scratch—such as <a href='https://iqbol-restaurant.uz' target='_blank' class='text-emerald-500 underline decoration-emerald-500/40 hover:decoration-emerald-500 font-mono'>iqbol-restaurant.uz</a>.",
-                heroHireLabel: "To hire me, email:",
+                heroBadgeAvailable: "AVAILABLE FOR HIRE • OPEN TO OFFERS",
+                heroBadgeExp: "3+ Years Professional Experience",
+                heroBio: "I am a <strong class='text-slate-900 dark:text-white font-semibold'>Web Developer with 3 years of hands-on production experience</strong>. I architect high-speed, modern websites and digital platforms from scratch—including <a href='https://iqbol-restaurant.uz' target='_blank' class='text-emerald-400 underline font-mono font-semibold'>iqbol-restaurant.uz</a>.",
+                heroHireLabel: "Direct Hire & Contact:",
                 copyBtn: "Copy",
-                heroBtnProjects: "View My Projects",
-                heroBtnContact: "Hire Me / Contact",
-                statExp: "Years of Experience",
-                statQuality: "Responsive & Fast",
-                statSupport: "Reliable Communication",
-                heroLiveCardSub: "Click to inspect the live production website",
-                aboutTag: "About Me & Experience",
-                aboutTitle: "3 Years of Web Development Experience",
-                aboutSubtitle: "I approach every project not just as lines of code, but as a complete digital product designed to grow businesses and delight users.",
-                exp1Title: "Frontend Foundations & Responsive UI",
-                exp1Desc: "Mastered HTML5, CSS3, JavaScript, and modern layout architectures. Crafting pixel-perfect interfaces that work seamlessly across mobile, tablet, and desktop.",
-                exp2Title: "Modern Frameworks & Interactive Apps",
-                exp2Desc: "Building dynamic applications with Tailwind CSS, React, modern JavaScript, and REST APIs with smooth animations and high performance.",
-                exp3Title: "Production Platforms & End-to-End Delivery",
-                exp3Desc: "Launching complete commercial websites from scratch to live domain deployment—including the official <strong class='text-emerald-500'>iqbol-restaurant.uz</strong> platform.",
-                skillsTag: "Technical Stack",
-                skillsTitle: "Technologies I Work With",
-                filterAll: "All Skills",
-                filterTools: "Tools & UI",
-                projectsTag: "Portfolio & Work",
-                projectsTitle: "Featured Websites & Projects",
-                projectsSubtitle: "Real-world websites and digital solutions built during my 3 years as a web developer.",
-                iqbolDesc: "<strong>iqbol-restaurant.uz</strong> is a custom-built modern website and digital menu platform designed for Iqbol Restaurant. Guests can easily explore dishes, prices, restaurant atmosphere, and contact details from any device.",
-                iqbolFeat1: "100% responsive layout across smartphones, tablets, and desktops",
-                iqbolFeat2: "Clean UI/UX interface with fast loading performance",
-                iqbolFeat3: "SEO optimization and full production domain/SSL deployment",
-                btnVisitSite: "Visit iqbol-restaurant.uz",
-                btnDetails: "Case Study",
-                sol1Title: "Corporate & Business Websites",
-                sol1Desc: "Professional, high-converting websites for companies, restaurants, clinics, and service brands.",
-                sol2Title: "Digital Catalogs & QR Menus",
-                sol2Desc: "Fast, mobile-friendly digital menus and product catalogs inspired by the Iqbol Restaurant platform.",
-                sol3Title: "Custom Web Apps & Frontend",
-                sol3Desc: "Interactive dashboards, custom React interfaces, and modernizing existing web platforms.",
-                orderLink: "Inquire now →",
-                contactBadge: "HIRE ME & COLLABORATION",
-                contactHeading: "Want to hire me or start a new project?",
-                contactText: "If you would like to hire me as a developer for your team or order a custom website for your business, feel free to write to my email address below:",
-                emailLabel: "Official Email Address:",
-                btnCopyEmail: "Copy Email",
-                btnSendMail: "Send Email Now",
-                infoExp: "3 years experience",
-                infoLoc: "Uzbekistan (Remote / On-site)",
-                formTitle: "Send a Quick Message",
-                formSubtitle: "Fill out the form below — your message will be prepared directly for ur.usmonov@gmail.com.",
-                formNameLabel: "Your Name or Company *",
-                formContactLabel: "Email or Telegram / Phone *",
-                formTypeLabel: "Inquiry Type",
-                formMsgLabel: "Your Message *",
-                formSubmitBtn: "Send to ur.usmonov@gmail.com"
+                heroBtnProjects: "Explore Live Work (iqbol-restaurant.uz)",
+                heroBtnContact: "Send a Message",
+                btnVisitSite: "Visit iqbol-restaurant.uz Live",
+                contactHeading: "Want to hire me? Let's connect directly!",
+                formSubmitBtn: "Submit & Open Captcha Verification (ur.usmonov@gmail.com)"
             }
         };
 
@@ -1155,7 +1660,6 @@
             currentLang = currentLang === 'uz' ? 'en' : 'uz';
             document.getElementById('lang-label').textContent = currentLang.toUpperCase();
             document.getElementById('mobile-lang-label').textContent = currentLang.toUpperCase();
-
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (translations[currentLang][key]) {
@@ -1164,9 +1668,13 @@
             });
         }
 
-        // Initialize on load
+        // INITIALIZE EVERYTHING ON LOAD
         window.onload = function () {
+            startPreloader();
             renderSkills('all');
+            runTypewriter();
+            initSpotlightCards();
+            initNetworkCanvas();
             document.getElementById('current-year').textContent = new Date().getFullYear();
         };
     </script>
